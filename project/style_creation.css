@@ -1,0 +1,52 @@
+body {
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+  }
+  
+  .form-title {
+    text-align: center;
+    color: #c92626;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #3b1313;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  select {
+    width: 200px;
+    padding: 10px;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .form-space {
+    height: 20px;
+  }
+  
+  .form-info {
+    color: #999;
+    font-style: italic;
+  }
+  
+  .form-submit {
+    width: 150px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-submit:hover {
+    background-color: #555;
+  }
+  

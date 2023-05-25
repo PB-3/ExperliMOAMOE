@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+  <title>Ma page HTML</title>
+
+  <script>
+    $(document).ready(function() {
+        // Appel AJAX pour récupérer les données depuis le fichier PHP
+        $.ajax({
+            url: "login.php",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                // Traitement des données récupérées
+                // Par exemple, afficher les données dans des éléments HTML
+                $("#nom_utilisateur").text(data.nom_utilisateur);
+                $("#email_utilisateur").text(data.email_utilisateur);
+            },
+            error: function(xhr, status, error) {
+                // Gérer les erreurs de la requête AJAX
+                console.log("Erreur lors de la récupération des données : " + error);
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+  <h1>Titre de la page</h1>
+  
+  <p>Ceci est un paragraphe.</p>
+  
+  <ul>
+    <li>Élément de liste 1</li>
+    <li>Élément de liste 2</li>
+    <li>Élément de liste 3</li>
+  </ul>
+  
+  <a href="https://www.example.com">Lien vers Example.com</a>
+  
+ 
+
+</body>
+</html>
