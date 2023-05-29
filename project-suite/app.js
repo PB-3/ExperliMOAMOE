@@ -20,11 +20,6 @@ function testHTML() {
 
 
 
-
-
-
-
-
 // Fonction pour afficher la première étape du jeu
 function afficherEtape1() {
   var contentDiv = document.querySelector(".content");
@@ -134,66 +129,328 @@ NouvellesFonctionnalites = [];
 AmeliorationPerf=[];
 ResolutionsBug=[];
 function fonctionnalites(){
+  
   var contentDiv = document.querySelector(".content");
-
+  
+  if(NouvellesFonctionnalites.length>=2 && AmeliorationPerf.length>=2 && ResolutionsBug.length>=2)
+  {
   contentDiv.innerHTML = `
   <p>Nouvelles fonctionnalités : ${NouvellesFonctionnalites}</p>
   <p>Ameliorations Perfs : ${AmeliorationPerf}</p>
   <p>ResolutionsBug : ${ResolutionsBug}</p>
-  <button class="next" onclick="getOptionText(this)">Next</button>
   `;
   var btnContinuer = document.querySelector(".next");
   btnContinuer.addEventListener("click", testHTML);
   console.log(NouvellesFonctionnalites)
+  }
+  else
+  {console.log("choix des func en cours")};
+  
 }
 
 
-
+var nombre_choix=2;
 function afficherEtape4() {
+ 
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
   <div class="smart-tablette">
-  <h2>Choix disponibles</h2>
+  <h2>Choix disponibles 2 par catégories</h2>
   <h3>Nouvelles fonctionnalités :</h3>
   <ul id="nouvelles-fonctionnalites">
-    <li><button  onclick="getOptionText(this, NouvellesFonctionnalites)">Site disponible sur smartphones et tablettes (+X jours)</button></li>
-    <li><button  onclick="getOptionText(this, NouvellesFonctionnalites)">Bouton de partage pour partager facilement sur les réseaux sociaux (+X jours)</button></li>
-    <li><button onclick="getOptionText(this, NouvellesFonctionnalites)">Système de recherche avancée pour trouver rapidement des informations cherchées (+X jours)</button></li>
-    <li><button onclick="getOptionText(this, NouvellesFonctionnalites)">Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités (+X jours)</button></li>
-    <li><button  onclick="getOptionText(this, NouvellesFonctionnalites)">Option permettant de personnaliser la couleur, la mise en page, le thème… (+X jours)</button></li>
-    <li><button  onclick="getOptionText(this, NouvellesFonctionnalites)">Traduction du site en anglais (+X jours)</button></li>
+    <li><button class="NouvellesFonctionnalites", onclick="getOptionText(this, NouvellesFonctionnalites,'NouvellesFonctionnalites')">Site disponible sur smartphones et tablettes (+X jours)</button></li>
+    <li><button class="NouvellesFonctionnalites", onclick="getOptionText(this, NouvellesFonctionnalites,'NouvellesFonctionnalites')">Bouton de partage pour partager facilement sur les réseaux sociaux (+X jours)</button></li>
+    <li><button class="NouvellesFonctionnalites", onclick="getOptionText(this, NouvellesFonctionnalites,'NouvellesFonctionnalites')">Système de recherche avancée pour trouver rapidement des informations cherchées (+X jours)</button></li>
+    <li><button  class="NouvellesFonctionnalites",onclick="getOptionText(this, NouvellesFonctionnalites,'NouvellesFonctionnalites')">Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités (+X jours)</button></li>
+    <li><button class="NouvellesFonctionnalites", onclick="getOptionText(this, NouvellesFonctionnalites,'NouvellesFonctionnalites')">Option permettant de personnaliser la couleur, la mise en page, le thème… (+X jours)</button></li>
+    <li><button class="NouvellesFonctionnalites", onclick="getOptionText(this, NouvellesFonctionnalites,'NouvellesFonctionnalites')">Traduction du site en anglais (+X jours)</button></li>
   </ul>
-  
-  <h3>Améliorations des performances :</h3>
-  <ul id="ameliorations-performances">
-    <li><button  onclick="getOptionText(this,AmeliorationPerf)">Temps de chargement de la page d’accueil plus court (+X jours)</button></li>
-    <li><button  onclick="getOptionText(this,AmeliorationPerf)">Votre site sera disponible sur tous les navigateurs (+X jours)</button></li>
-    <li><button  onclick="getOptionText(this,AmeliorationPerf)">Chargement plus rapide des images (+X jours)</button></li>
-    <li><button onclick="getOptionText(this, AmeliorationPerf)">Réduction de la consommation de données (+X jours)</button></li>
-  </ul>
-  
   <h3>Corrections de bugs :</h3>
   <ul id="corrections-bugs">
-    <li><button  onclick="getOptionText(this, ResolutionsBug)">Résolution du problème d’affichage des caractères spéciaux (+X jours)</button></li>
-    <li><button  onclick="getOptionText(this, ResolutionsBug)">Résolution du problème qui empêchait l’affichage correct des images sur certaines pages (+X jours)</button></li>
-    <li><button onclick="getOptionText(this, ResolutionsBug)">Résolution du problème qui empêchait certains utilisateurs de télécharger des fichiers du site (+X jours)</button></li>
+    <li><button class="ResolutionsBug", onclick="getOptionText(this, ResolutionsBug,'ResolutionsBug')">Résolution du problème d’affichage des caractères spéciaux (+X jours)</button></li>
+    <li><button class="ResolutionsBug", onclick="getOptionText(this, ResolutionsBug,'ResolutionsBug')">Résolution du problème qui empêchait l’affichage correct des images sur certaines pages (+X jours)</button></li>
+    <li><button class="ResolutionsBug", onclick="getOptionText(this, ResolutionsBug,'ResolutionsBug')">Résolution du problème qui empêchait certains utilisateurs de télécharger des fichiers du site (+X jours)</button></li>
   </ul>
-  </div>
-  
-</div>
+  <h3>Améliorations des performances :</h3>
+  <ul id="ameliorations-performances">
+    <li><button class="AmeliorationPerf", onclick="getOptionText(this,AmeliorationPerf,'AmeliorationPerf')">Temps de chargement de la page d’accueil plus court (+X jours)</button></li>
+    <li><button class="AmeliorationPerf", onclick="getOptionText(this,AmeliorationPerf,'AmeliorationPerf')">Votre site sera disponible sur tous les navigateurs (+X jours)</button></li>
+    <li><button class="AmeliorationPerf", onclick="getOptionText(this,AmeliorationPerf,'AmeliorationPerf')">Chargement plus rapide des images (+X jours)</button></li>
+    <li><button class="AmeliorationPerf", onclick="getOptionText(this, AmeliorationPerf,'AmeliorationPerf')">Réduction de la consommation de données (+X jours)</button></li>
+  </ul>
+  <button class="btn-continuer"> Next </button>
 
-  `;
-  var btnContinuer = document.querySelector(".smart-tablette");
-  btnContinuer.addEventListener("click", fonctionnalites);
+  </div>  
+`;
+  var btnContinuer = document.querySelector(".btn-continuer");
+  btnContinuer.addEventListener("click", afficherEtape5);
 
  
 }
-function getOptionText(button,listes) {
-  var optionText = button.innerText;
-  listes.push(button.innerText)
-  console.log(optionText);
+
+
+  
+  function getOptionText(button, liste,nom_liste) {
+    var newFuncButtons = document.querySelectorAll('nom_liste');
+    if (liste.length >= 2) {
+      disableButtons(newFuncButtons);
+      console.log('disabled');
+    }
+    if (liste.length<2)
+   {
+    var optionText = button.innerText;
+    liste.push(button.innerText);
+    console.log(liste);
+   }
+  }
+  
+  function disableButtons(buttons) {
+    buttons.forEach(button => {
+      button.disabled = true;
+    });
+  }
+
+  const choixSelectionnes = [];
+  const choixNonSelectionnes = [];
+var choixSelectionnesListe = '<ul>';
+ var choixNonSelectionnesListe = '<ul>';
+  function afficherEtape5() {
+    var contentDiv = document.querySelector(".content");
+    contentDiv.innerHTML = `
+      <h2>Choix multiple</h2>
+      <p>Description :</p>
+      <p>Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d’enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</p>
+      <p>Choix disponibles :</p>
+      <form id="choixForm">
+        <ul>
+          <li>
+            <input type="checkbox" id="site-smartphones-tablettes" name="choix" value="site-smartphones-tablettes">
+            <label for="site-smartphones-tablettes">Site disponible sur smartphones et tablettes</label>
+          </li>
+          <li><input type="checkbox" id="bouton-partage" name="choix" value="bouton-partage">
+          <label for="bouton-partage">Bouton de partage pour partager facilement sur les réseaux sociaux</label></li>
+        <li><input type="checkbox" id="recherche-avancee" name="choix" value="recherche-avancee">
+          <label for="recherche-avancee">Système de recherche avancée pour trouver rapidement des informations cherchées</label></li>
+        <li><input type="checkbox" id="section-actualites" name="choix" value="section-actualites">
+          <label for="section-actualites">Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités</label></li>
+        <li><input type="checkbox" id="personnalisation" name="choix" value="personnalisation">
+          <label for="personnalisation">Option permettant de personnaliser la couleur, la mise en page, le thème...</label></li>
+        <li><input type="checkbox" id="traduction-anglais" name="choix" value="traduction-anglais">
+          <label for="traduction-anglais">Traduction du site en anglais</label></li>
+        <li><input type="checkbox" id="temps-chargement" name="choix" value="temps-chargement">
+          <label for="temps-chargement">Temps de chargement de la page d’accueil plus court</label></li>
+        <li><input type="checkbox" id="site-tous-navigateurs" name="choix" value="site-tous-navigateurs">
+          <label for="site-tous-navigateurs">Votre site sera disponible sur tous les navigateurs</label></li>
+        <li><input type="checkbox" id="chargement-rapide-images" name="choix" value="chargement-rapide-images">
+          <label for="chargement-rapide-images">Chargement plus rapide des images</label></li>
+        <li><input type="checkbox" id="reduction-donnees" name="choix" value="reduction-donnees">
+          <label for="reduction-donnees">Réduction de la consommation de données</label></li>
+        <li><input type="checkbox" id="resolution-caracteres-speciaux" name="choix" value="resolution-caracteres-speciaux">
+          <label for="resolution-caracteres-speciaux">Résolution du problème d’affichage des caractères spéciaux</label></li>
+        <li><input type="checkbox" id="resolution-images" name="choix" value="resolution-images">
+          <label for="resolution-images">Résolution du problème qui empêchait l’affichage correct des images sur certaines pages</label></li>
+        <li><input type="checkbox" id="resolution-telechargement" name="choix" value="resolution-telechargement">
+          <label for="resolution-telechargement">Résolution du problème qui empêchait certains utilisateurs de télécharger des fichiers du site</label></li>
+        <li><input type="checkbox" id="rien-faire" name="choix" value="rien-faire">
+          <label for="rien-faire">Ne rien faire, tout se passera bien</label></li>
+        </ul>
+        <button class="btn-continuer" , type="submit">Valider</button>
+      </form>
+    `;
+  
+    const choixForm = document.getElementById('choixForm');
+  
+    choixForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+ 
+  const checkboxes = document.querySelectorAll('input[name="choix"]');
+  checkboxes.forEach(function(checkbox) {
+    if (checkbox.checked) {
+      choixSelectionnes.push(checkbox.value);
+    } else {
+      choixNonSelectionnes.push(checkbox.value);
+    }});
+     
+ // Construction de la liste des choix sélectionnés
+ 
+ choixSelectionnes.forEach(function(choix) {
+   choixSelectionnesListe += `<li>${choix}</li>`;
+ });
+ choixSelectionnesListe += '</ul>';
+
+ // Construction de la liste des choix non sélectionnés
+ 
+ choixNonSelectionnes.forEach(function(choix) {
+   choixNonSelectionnesListe += `<li>${choix}</li>`;
+ });
+ choixNonSelectionnesListe += '</ul>';
+ 
+    
+      var text;
+      var contentDiv = document.querySelector(".content");
+      contentDiv.innerHTML=`<button class="btn-continuer">Next</button>`;
+      contentDiv.innerHTML += `<div><h3>Choix sélectionnés :</h3>${choixSelectionnesListe}</div>`;
+
+      var btnContinuer = document.querySelector(".btn-continuer");
+      btnContinuer.addEventListener('click', afficherEtape6);     
+    });
+  }
+
+
+
+  function afficherEtape6() {
+    var contentDiv = document.querySelector(".content");
+    contentDiv.innerHTML=`<button class="btn-continuer">Next</button>`;
+   let htmll = ``;
+    choixNonSelectionnes.forEach(function (choix) {
+       htmll += `
+        <ul>
+          <li><input type="checkbox" id="${choix}" name="choix" value="${choix}">
+          <label for="${choix}">${choix}</label></li>
+        </ul>
+    
+       
+      `;
+     
+    });
+    contentDiv.innerHTML+=` 
+    
+
+    <form id="choixForm">
+    ${htmll}
+
+    </form>`;
+  
+    contentDiv.addEventListener('change', function (event) {
+      if (event.target.type === 'checkbox') {
+        // Gérer les modifications des cases à cocher ici
+        var checkbox = event.target;
+        if (checkbox.checked) {
+          // La case à cocher a été cochée
+          choixSelectionnes.push(checkbox.value);
+          console.log(checkbox.value);
+          console.log(choixSelectionnes);
+        } 
+      }
+    });
+
+    var choixForm = document.getElementById('choixForm');
+  choixForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+     
+
+  });
+  var btnContinuer = document.querySelector(".btn-continuer");
+ 
+  btnContinuer.addEventListener('click', afficherEtape7,console.log('ksjdf'));
+
+  }
+  
+function afficherEtape7(){
+  var contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML=``;
+  choixSelectionnes.forEach(function (choix) {contentDiv.innerHTML+=`<p>${choix}</p>`});
+    contentDiv.innerHTML+=`<button class="btn-continuer">Next</button> <p>test</p>`;
+
+
+var btnContinuer = document.querySelector(".btn-continuer");
+btnContinuer.addEventListener('click',afficherEtape8);
+
+
 }
+function afficherEtape8(){
+  var contentDiv = document.querySelector(".content");
+contentDiv.innerHTML=`
+ <p>test</p>
+<h2>Choix multiple (1 option)</h2>
+<p>Description :</p>
+<p>L’équipe de la MOE a réalisé une version intermédiaire du site web et vous propose de le tester.</p>
+<p>Choix disponibles :</p>
+<form id="choixForm">
+  <ul>
+    <li>
+      <input type="radio" id="tester" name="choix" value="tester">
+      <label for="tester">Le tester (+ X jours)</label>
+    </li>
+    <li>
+      <input type="radio" id="rien-faire" name="choix" value="rien-faire">
+      <label for="rien-faire">Ne rien faire, vous leur faîtes confiance</label>
+    </li>
+  </ul>
+  <button class="btn-continuer" type="submit">Valider</button>
+</form>
+`;
 
+var choixForm = document.getElementById('choixForm');
+choixForm.addEventListener('submit', afficherEtape9)
 
+}; 
 
+function afficherEtape9(event){
+  var contentDiv = document.querySelector(".content");  
+    event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+    var form = event.target;
+    var selectedChoice = null;
+  
+    // Parcours des éléments du formulaire pour trouver le choix sélectionné
+    for (var i = 0; i < form.elements.length; i++) {
+      var element = form.elements[i];
+      if (element.type === 'radio' && element.checked) {
+        selectedChoice = element.value;
+        break;
+      }
+    }
+  
+    if (selectedChoice !== null) {
+      contentDiv.innerHTML = `<p>${selectedChoice} sélectionné</p>
+      <button class="btn-continuer">Next</button> <p>test</p>
+      `;
+    }
+  
+  var btnContinuer = document.querySelector(".btn-continuer");
+btnContinuer.addEventListener('click',afficherEtape10);
+};
+
+function afficherEtape10(){
+var contentDiv = document.querySelector(".content");
+contentDiv.innerHTML=`
+<h2>Aucune action à faire</h2>
+<p>Description :</p>
+<p>Vous avez testé la version intermédiaire du site et vous êtes amplement satisfait du travail réalisé.</p>
+<button class="btn-continuer">Next</button> <p>test</p>`;
+var btnContinuer = document.querySelector(".btn-continuer");
+btnContinuer.addEventListener('click',afficherEtape11);
+
+};
+function afficherEtape11(){
+
+var contentDiv = document.querySelector(".content");
+contentDiv.innerHTML=`<button class="btn-continuer">Next</button> 
+<h2>Le projet est dans les temps</h2>
+<p>Description :</p>
+<p>Votre ami vous propose de partir 10 jours dans une région reculée pour vous reposer.</p>
+<p>Choix disponibles :</p>
+<form id="choixForm">
+  <ul>
+    <li>
+      <input type="radio" id="accepter" name="choix" value="accepter">
+      <label for="accepter">Vous acceptez, un peu de repos ne pourrait pas faire de mal</label>
+    </li>
+    <li>
+      <input type="radio" id="refuser" name="choix" value="refuser">
+      <label for="refuser">Vous refusez, vous prendrez vos vacances une fois le projet fini</label>
+    </li>
+  </ul>
+  <button type="submit">Valider</button>
+</form>
+
+`;
+
+};
 afficherEtape1();
+
+
+// var contentDiv = document.querySelector(".content");
+// contentDiv.innerHTML=`<button class="btn-continuer">Next</button> <p>test</p>`;
+// var btnContinuer = document.querySelector(".btn-continuer");
+// btnContinuer.addEventListener('click',afficherEtape);
