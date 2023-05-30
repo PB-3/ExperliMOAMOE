@@ -513,11 +513,7 @@ function afficherEtape12(event){
         </li>
         <li>
           <input type="radio" id="abandonner-fonctionnalite" name="choix" value="abandonner-fonctionnalite">
-          <label for="abandonner-fonctionnalite">Abandonner cette fonctionnalité</label>
-        </li>
-        <li>
-          <input type="radio" id="abandonner-autre-fonctionnalite" name="choix" value="abandonner-autre-fonctionnalite">
-          <label for="abandonner-autre-fonctionnalite">Abandonner une autre fonctionnalité</label>
+          <label for="abandonner-fonctionnalite">Abandonner une fonctionnalité</label>
         </li>
         <li>
           <input type="radio" id="laisser-choix-moe" name="choix" value="laisser-choix-moe">
@@ -570,12 +566,189 @@ function afficherEtape13(event){
       <ul>
         ${htmlll}
       </ul>
-      <button class="btn-continuer">Next</button>
+      <button class="btn-continuer",type="submit">Next</button>
     </form>`;
-
+    var choixForm = document.getElementById('choixForm');
+    choixForm.addEventListener('submit', fonctionnalite_abandon);
 
   }
+  else
+  {
+      contentDiv.innerHTML=`
+
+  <h2>Choix multiple (1 choix)</h2>
+  <p>Description:</p>
+  <p>Le chef de projet vous informe que le développement du site est terminé, mais des tests supplémentaires sont nécessaires pour s'assurer du bon fonctionnement. Il vous propose différentes options pour les tests.</p>
+  <p>Choix disponibles:</p>
+  <form id="choixForm">
+  <ul>
+    <li>
+      <input type="radio" id="testsFonctionnels" name="tests" value="testsFonctionnels">
+      <label for="testsFonctionnels">Effectuer des tests fonctionnels approfondis sur toutes les fonctionnalités (+2 jours)</label>
+    </li>
+    <li>
+      <input type="radio" id="testsPerformance" name="tests" value="testsPerformance">
+      <label for="testsPerformance">Réaliser des tests de performance et d'optimisation (+1 jour)</label>
+    </li>
+    <li>
+      <input type="radio" id="testsCompatibilite" name="tests" value="testsCompatibilite">
+      <label for="testsCompatibilite">Effectuer des tests de compatibilité sur différents navigateurs et appareils (+2 jours)</label>
+    </li>
+    <li>
+      <input type="radio" id="sansTests" name="tests" value="sansTests">
+      <label for="sansTests">Ne faire aucun test</label>
+    </li>
+    <li>
+      <input type="radio" id="choixMOE" name="tests" value="choixMOE">
+      <label for="choixMOE">Laisser le choix à la MOE (+5 jours)</label>
+    </li>
+  </ul>
+
+  <button class="btn-continuer",type="submit">Next</button>
+  </form>
+
+      `;
+      var choixForm = document.getElementById('choixForm');
+  choixForm.addEventListener('submit', test_perf_page_8);
+  }
+  
 }
+
+function fonctionnalite_abandon(event)
+{
+  var contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML=``;  
+  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+  var form = event.target;
+  var selectedChoice = null;
+
+  // Parcours des éléments du formulaire pour trouver le choix sélectionné
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    if (element.type === 'radio' && element.checked) {
+      selectedChoice = element.value;
+      break;
+    }
+  }
+  console.log(NouvellesFonctionnalites);
+  console.log('-----------------------');
+
+  var index = NouvellesFonctionnalites.indexOf(selectedChoice);
+  if (index !== -1) {
+    NouvellesFonctionnalites.splice(index, 1);
+  }
+  contentDiv.innerHTML=`<p> AAAAAAAAAAA </p>
+  <p> ${NouvellesFonctionnalites}</p>`
+  console.log(NouvellesFonctionnalites); 
+}
+
+
+
+function test_perf_page_8(event){
+  var contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML=``;  
+  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+  var form = event.target;
+  var selectedChoice = null;
+
+  // Parcours des éléments du formulaire pour trouver le choix sélectionné
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    if (element.type === 'radio' && element.checked) {
+      selectedChoice = element.value;
+      break;
+    }
+  }
+console.log(selectedChoice);
+if (selectedChoice=='choixMOE')
+{
+  console.log('choixMOE++');
+  contentDiv.innerHTML=`
+
+  <h2>Aucune action à faire</h2>
+  <p>Description:</p>
+  <p>Le site est sur le point d'être déployé. Aucune action supplémentaire n'est requise de votre part.</p>
+  <p>Texte supplémentaire:</p>
+  <p>Le déploiement du site a été effectué avec succès. Toutes les fonctionnalités sont opérationnelles et prêtes à être utilisées. Félicitations pour votre travail!</p>
+
+  <button class="btn-continuer",type="submit">Next</button>
+  `;
+   var btnContinuer = document.querySelector(".btn-continuer");
+btnContinuer.addEventListener('click',afficherEtapeFin);
+
+
+}
+else if (selectedChoice=='sansTests')
+{
+  contentDiv.innerHTML=`
+
+  <h2>Aucune action à faire</h2>
+  <p>Description:</p>
+  <p>Le site est sur le point d'être déployé. Aucune action supplémentaire n'est requise de votre part.</p>
+  <p>Texte supplémentaire:</p>
+  <p>Le déploiement du site a été effectué avec succès. Toutes les fonctionnalités sont opérationnelles et prêtes à être utilisées. Félicitations pour votre travail!</p>
+
+  <button class="btn-continuer",type="submit">Next</button>
+  `;
+   var btnContinuer = document.querySelector(".btn-continuer");
+btnContinuer.addEventListener('click',afficherEtapeFin);
+}
+else
+{
+  contentDiv.innerHTML=`
+
+  <h2>Choix multiple (1 choix)</h2>
+  <p>Description:</p>
+  <p>Le chef de projet vous fait part des résultats des tests effectués sur le site. Il identifie plusieurs problèmes mineurs qui peuvent être corrigés rapidement, ainsi qu'un problème majeur qui nécessite plus de temps pour être résolu.</p>
+  <p>Choix disponibles:</p>
+  <form id="choixForm">
+  <ul>
+    <li>
+      <input type="radio" id="problemes-mineurs" name="choix" value="correction-mineurs">
+      <label for="problemes-mineurs">Corriger uniquement les problèmes mineurs (+2 jours)</label>
+    </li>
+    <li>
+      <input type="radio" id="probleme-majeur" name="choix" value="correction-majeur">
+      <label for="probleme-majeur">Corriger uniquement le problème majeur (+3 jours)</label>
+    </li>
+    <li>
+      <input type="radio" id="problemes-mineurs-majeur" name="choix" value="correction-mineurs-majeur">
+      <label for="problemes-mineurs-majeur">Corriger à la fois les problèmes mineurs et le problème majeur (+5 jours)</label>
+    </li>
+    <li>
+      <input type="radio" id="ne-rien-faire" name="choix" value="ne-rien-faire">
+      <label for="ne-rien-faire">Ne rien faire, le problème majeur n'est pas critique (voir 9,5 bis)</label>
+    </li>
+    <li>
+      <input type="radio" id="choix-moe" name="choix" value="choix-moe">
+      <label for="choix-moe">Laisser le choix à la MOE (+5 jours)</label>
+    </li>
+  </ul>
+   <button class="btn-continuer",type="submit">Next</button>
+  </form>
+
+
+  `;
+  var choixForm = document.getElementById('choixForm');
+  choixForm.addEventListener('submit', afficherEtapeFin);
+  
+}
+
+}
+function afficherEtapeFin()
+{
+  var contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML=`
+  
+  <h2>Le site web est déployé avec succès</h2>
+  <p>Description:</p>
+  <p>Le chef de projet vous informe que tous les problèmes ont été corrigés et que le site est prêt à être déployé.</p>
+  <p>Le site web est déployé avec succès sur les plateformes choisies. Les délais et le budget ont été respectés et votre site répond à vos attentes. Vous recevez les retours des utilisateurs sur le site web et constatez leur satisfaction.</p>
+
+
+  `;  
+};
+
 afficherEtape1();
 
 
