@@ -2,9 +2,8 @@ function testHTML() {
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
     <div class="game-title">
-      <p> TEST </p>
-      <p>Nouvelles fonctionnalités : ${NouvellesFonctionnalites}</p>
-      <button class="btn-continuer">Continuer</button>
+      <p> CECI EST LA PAGE DE TEST </p>
+       
 
     </div>
   `;
@@ -125,9 +124,12 @@ function afficherEtape3() {
   });
 
 }
+
+
 NouvellesFonctionnalites = [];
 AmeliorationPerf=[];
 ResolutionsBug=[];
+
 function fonctionnalites(){
   
   var contentDiv = document.querySelector(".content");
@@ -377,7 +379,7 @@ contentDiv.innerHTML=`
       <label for="rien-faire">Ne rien faire, vous leur faîtes confiance</label>
     </li>
   </ul>
-  <button class="btn-continuer" type="submit">Valider</button>
+  <button class="btn-continuer", type="submit">Valider</button>
 </form>
 `;
 
@@ -385,6 +387,7 @@ var choixForm = document.getElementById('choixForm');
 choixForm.addEventListener('submit', afficherEtape9)
 
 }; 
+
 
 function afficherEtape9(event){
   var contentDiv = document.querySelector(".content");  
@@ -425,7 +428,8 @@ btnContinuer.addEventListener('click',afficherEtape11);
 function afficherEtape11(){
 
 var contentDiv = document.querySelector(".content");
-contentDiv.innerHTML=`<button class="btn-continuer">Next</button> 
+contentDiv.innerHTML=`
+
 <h2>Le projet est dans les temps</h2>
 <p>Description :</p>
 <p>Votre ami vous propose de partir 10 jours dans une région reculée pour vous reposer.</p>
@@ -441,16 +445,141 @@ contentDiv.innerHTML=`<button class="btn-continuer">Next</button>
       <label for="refuser">Vous refusez, vous prendrez vos vacances une fois le projet fini</label>
     </li>
   </ul>
-  <button type="submit">Valider</button>
+  <button class="btn-continuer" type="submit">Next</button>
+
 </form>
 
 `;
 
+var choixForm = document.getElementById('choixForm');
+choixForm.addEventListener('submit', afficherEtape12)
 };
+
+
+function afficherEtape12(event){
+
+  var contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML=``;  
+  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+  var form = event.target;
+  var selectedChoice = null;
+
+  // Parcours des éléments du formulaire pour trouver le choix sélectionné
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    if (element.type === 'radio' && element.checked) {
+      selectedChoice = element.value;
+      break;
+    }
+  }
+
+  if (selectedChoice == 'accepter') {
+    contentDiv.innerHTML=`
+
+    <h2>Choix multiple (1 choix)</h2>
+  <p>Description :</p>
+  <p>Vous rentrez de vos vacances. Votre boîte mail est pleine, le manque de réseau fait que vous n’avez pas pu les recevoir. Le chef de projet a tenté en vain de vous appeler. (La mise en place du site web sur Android/ ou une autre option que le joueur choisit) pose des problèmes. Comme vous n’avez pas répondu et qu’il ne pouvait pas vous attendre, il a décidé de continuer à l’implémenter sur Android au risque de prendre du retard et d'augmenter le coût total.</p>
+  <p>(+ X jours)</p>
+  <p>Choix disponible :</p>
+  <form id="choixForm">
+    <ul>
+      <li>
+        <input type="radio" id="abandonner" name="choix" value="abandonner">
+        <label for="abandonner">Abandonner une autre fonctionnalité (-X jours)</label>
+      </li>
+      <li>
+        <input type="radio" id="ne-rien-faire" name="choix" value="ne-rien-faire">
+        <label for="ne-rien-faire">Ne rien faire</label>
+      </li>
+    </ul>
+    <button class="btn-continuer">Next</button>
+  </form>
+  
+  
+    `;
+   
+  }
+  else{
+    contentDiv.innerHTML=`
+    <h2>Choix multiple</h2>
+    <p>Description :</p>
+    <p>Vous recevez un mail de la part du chef de projet. (La mise en place du site web sur Android/ ou une autre option que le joueur choisit) pose des problèmes. Il vous propose de résoudre le problème au risque de prendre du retard (X jours en plus) ou d’abandonner cette fonctionnalité.</p>
+    <p>Choix disponible :</p>
+    <form id="choixForm">
+      <ul>
+        <li>
+          <input type="radio" id="resoudre-probleme" name="choix" value="resoudre-probleme">
+          <label for="resoudre-probleme">Résoudre le problème (+ X jours)</label>
+        </li>
+        <li>
+          <input type="radio" id="abandonner-fonctionnalite" name="choix" value="abandonner-fonctionnalite">
+          <label for="abandonner-fonctionnalite">Abandonner cette fonctionnalité</label>
+        </li>
+        <li>
+          <input type="radio" id="abandonner-autre-fonctionnalite" name="choix" value="abandonner-autre-fonctionnalite">
+          <label for="abandonner-autre-fonctionnalite">Abandonner une autre fonctionnalité</label>
+        </li>
+        <li>
+          <input type="radio" id="laisser-choix-moe" name="choix" value="laisser-choix-moe">
+          <label for="laisser-choix-moe">Laisser le choix à la MOE</label>
+        </li>
+      </ul>
+      <button class="btn-continuer",type="submit">Next</button>
+    </form>
+    `
+  }
+  var choixForm = document.getElementById('choixForm');
+choixForm.addEventListener('submit', afficherEtape13);
+
+//  var btnContinuer = document.querySelector(".btn-continuer");
+ // btnContinuer.addEventListener('click',testHTML);
+}
+
+function afficherEtape13(event){
+  var contentDiv = document.querySelector(".content");
+  contentDiv.innerHTML=``;  
+  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+  var form = event.target;
+  var selectedChoice = null;
+
+  // Parcours des éléments du formulaire pour trouver le choix sélectionné
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    if (element.type === 'radio' && element.checked) {
+      selectedChoice = element.value;
+      break;
+    }
+  }
+
+  if (selectedChoice == 'abandonner-fonctionnalite')
+  {
+    var htmlll = "";
+    NouvellesFonctionnalites.forEach(function (fonctionnalite) {
+      htmlll += `<li>
+                 <input type="radio" id="${fonctionnalite}" name="choix" value="${fonctionnalite}">
+                 <label for="${fonctionnalite}">${fonctionnalite}</label>
+               </li>`;
+    });
+
+
+    contentDiv.innerHTML = `<h2>Choix multiple</h2>
+    <p>Description :</p>
+    <p>Quelle fonctionnalité souhaitez-vous annuler?</p>
+    <p>Choix disponible :</p>
+    <form id="choixForm">
+      <ul>
+        ${htmlll}
+      </ul>
+      <button class="btn-continuer">Next</button>
+    </form>`;
+
+
+  }
+}
 afficherEtape1();
 
 
 // var contentDiv = document.querySelector(".content");
-// contentDiv.innerHTML=`<button class="btn-continuer">Next</button> <p>test</p>`;
+// contentDiv.innerHTML=`<button class="btn-continuer">Next</button>`;
 // var btnContinuer = document.querySelector(".btn-continuer");
 // btnContinuer.addEventListener('click',afficherEtape);
