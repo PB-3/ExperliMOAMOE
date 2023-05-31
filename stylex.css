@@ -267,7 +267,7 @@ div.dropdown {
     
 
       div.recap-form {
-        color: #0000;
+        color: #000000;
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
@@ -275,6 +275,8 @@ div.dropdown {
         font-weight: bold;
         font-size: 20px;
         font-family: Georgia, 'Times New Roman', Times, serif;
+        word-wrap: break-word;
+        overflow: auto;
       }
       
       div.recap-form h2 {
