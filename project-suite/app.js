@@ -15,7 +15,13 @@ function testHTML() {
 
 
 
-
+var delais_jour = 0 ;
+var choix_let_MOE = 0 ; 
+var besoinsValue ;
+var budgetValue;
+var delaisValue ;
+var suiviValue; 
+var objectifValue;
 
 
 
@@ -83,11 +89,16 @@ function afficherEtape3() {
         <option value="1 an">1 an</option>
         <option value="2 ans">2 ans</option>
       </select>
-      
-
-      <label for="suivi">Structure de suivi :</label>
-      <textarea id="suivi" name="suivi" rows="4" cols="50"></textarea>
-
+ <br>
+  <label for="reunionSelec">Reccurrence reunions</label>
+  <select id="reunionSelect">
+    <option value="3 jours">Une réunion tous les trois jours</option>
+    <option value="par semaine">Une réunion par semaine</option>
+    <option value="toutes les deux semaines">Une réunion toutes les deux semaines</option>
+    <option value="par mois">Une réunion par mois</option>
+  </select>
+<br>
+     
       <label for="objectif">Objectif principal :</label>
       <textarea id="objectif" name="objectif" rows="4" cols="50"></textarea>
 
@@ -103,8 +114,14 @@ function afficherEtape3() {
       besoinsValue = document.getElementById("besoins").value;
       budgetValue = document.getElementById("budget").value;
       delaisValue = document.getElementById("delais").value;
-      suiviValue = document.getElementById("suivi").value;
+      suiviValue = document.getElementById("reunionSelect").value;
       objectifValue = document.getElementById("objectif").value;
+      if (suiviValue == '3 jours'){delais_jour+=2;}
+      if (suiviValue == 'par semaine'){delais_jour+=0;}
+      if (suiviValue == 'toutes les deux semaines'){delais_jour+=5;}
+      if (suiviValue == 'par mois'){delais_jour+=8;}
+
+      
   
       var contentDiv4 = document.querySelector(".content");
       contentDiv4.innerHTML = `
@@ -119,18 +136,33 @@ function afficherEtape3() {
         </div>
       `;
       var btnContinuer = document.querySelector(".btn-continuer");
-      btnContinuer.addEventListener("click", afficherEtape4);
+      btnContinuer.addEventListener("click", afficherEtape5);
      
   });
 
 }
 
+const optionsList = [
+  'Site disponible sur smartphones et tablettes',
+  'Bouton de partage pour partager facilement sur les réseaux sociaux',
+  'Système de recherche avancée pour trouver rapidement des informations cherchées',
+  'Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités',
+  'Option permettant de personnaliser la couleur, la mise en page, le thème…',
+  'Traduction du site en anglais',
+  'Temps de chargement de la page d’accueil plus court',
+  'Votre site sera disponible sur tous les navigateurs',
+  'Chargement plus rapide des images',
+  'Réduction de la consommation de données',
+  'Résolution du problème d’affichage des caractères spéciaux',
+  'Résolution du problème qui empêchait l’affichage correct des images sur certaines pages',
+  'Résolution du problème qui empêchait certains utilisateurs de télécharger des fichiers du site'
+];
 
 NouvellesFonctionnalites = [];
 AmeliorationPerf=[];
 ResolutionsBug=[];
 
-function fonctionnalites(){
+function fonctionnalites(){ // not used 
   
   var contentDiv = document.querySelector(".content");
   
@@ -141,8 +173,7 @@ function fonctionnalites(){
   <p>Ameliorations Perfs : ${AmeliorationPerf}</p>
   <p>ResolutionsBug : ${ResolutionsBug}</p>
   `;
-  var btnContinuer = document.querySelector(".next");
-  btnContinuer.addEventListener("click", testHTML);
+  
   console.log(NouvellesFonctionnalites)
   }
   else
@@ -202,8 +233,25 @@ function afficherEtape4() {
    {
     var optionText = button.innerText;
     liste.push(button.innerText);
+    if(optionText=='Site disponible sur smartphones et tablettes') {delais_jour+=7;}
+    if (optionText == 'Site disponible sur smartphones et tablettes') {delais_jour += 7;}   
+    if (optionText == 'Bouton de partage pour partager facilement sur les réseaux sociaux') {delais_jour += 2;}    
+    if (optionText == 'Système de recherche avancée pour trouver rapidement des informations cherchées') {delais_jour += 5;}
+    if (optionText == 'Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités') {delais_jour += 4;}
+    if (optionText == 'Option permettant de personnaliser la couleur, la mise en page, le thème…') {delais_jour += 4;    
+    if (optionText == 'Traduction du site en anglais') {delais_jour += 6;}    
+    if (optionText == 'Temps de chargement de la page d’accueil plus court') {delais_jour += 3;}    
+    if (optionText == 'Votre site sera disponible sur tous les navigateurs') {delais_jour += 4;}    
+    if (optionText == 'Chargement plus rapide des images') {delais_jour += 4;}    
+    if (optionText == 'Réduction de la consommation de données') {delais_jour += 3;}    
+    if (optionText == 'Résolution du problème d’affichage des caractères spéciaux') {delais_jour += 2;}    
+    if (optionText == 'Résolution du problème qui empêchait l’affichage correct des images sur certaines pages') {delais_jour += 4;}    
+    if (optionText == 'Résolution du problème qui empêchait certains utilisateurs de télécharger des fichiers du site') {delais_jour += 4};
+    
+
     console.log(liste);
-   }
+    }
+  }
   }
   
   function disableButtons(buttons) {
@@ -216,6 +264,8 @@ function afficherEtape4() {
   const choixNonSelectionnes = [];
 var choixSelectionnesListe = '<ul>';
  var choixNonSelectionnesListe = '<ul>';
+
+
   function afficherEtape5() {
     var contentDiv = document.querySelector(".content");
     contentDiv.innerHTML = `
@@ -290,20 +340,49 @@ var choixSelectionnesListe = '<ul>';
     
       var text;
       var contentDiv = document.querySelector(".content");
-      contentDiv.innerHTML=`<button class="btn-continuer">Next</button>`;
-      contentDiv.innerHTML += `<div><h3>Choix sélectionnés :</h3>${choixSelectionnesListe}</div>`;
+      contentDiv.innerHTML=``;
+      
+      let htmll = `<p> Choix selectionnes </p>
+      <p> Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d’enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</p>
+      <br>
+      <p> supprimer un ou plusieurs choix parmi : </p>
+      `;
+      
+    choixSelectionnes.forEach(function (choix) {
+       htmll += `  
+        <ul>
+          <li><input type="checkbox" id="${choix}" name="choix" value="${choix}">
+          <label for="${choix}">${choix}</label></li>
+        </ul>
+    
+       
+      `;
+     
+    });
 
-      var btnContinuer = document.querySelector(".btn-continuer");
-      btnContinuer.addEventListener('click', afficherEtape6);     
+    contentDiv.innerHTML+=` 
+    
+
+    <form id="choixForm">
+    ${htmll}
+    <button class="btn-continuer">Next</button>
+    </form>`;
+
+    var choixForm = document.getElementById('choixForm');
+    choixForm.addEventListener('submit', afficherEtape6)
+           
     });
   }
 
 
 
-  function afficherEtape6() {
+  function afficherEtape6(event) {
+    event.preventDefault();
+    //fonctionnalite_abandon(event,optionsList);
+
     var contentDiv = document.querySelector(".content");
     contentDiv.innerHTML=`<button class="btn-continuer">Next</button>`;
-   let htmll = ``;
+   let htmll = `<p> Choix non selectionnes`;
     choixNonSelectionnes.forEach(function (choix) {
        htmll += `
         <ul>
@@ -569,7 +648,7 @@ function afficherEtape13(event){
       <button class="btn-continuer",type="submit">Next</button>
     </form>`;
     var choixForm = document.getElementById('choixForm');
-    choixForm.addEventListener('submit', fonctionnalite_abandon);
+    choixForm.addEventListener('submit', fonctionnalite_abandon(event,NouvellesFonctionnalites));
 
   }
   else
@@ -614,7 +693,7 @@ function afficherEtape13(event){
   
 }
 
-function fonctionnalite_abandon(event)
+function fonctionnalite_abandon(event,liste)
 {
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML=``;  
@@ -630,16 +709,15 @@ function fonctionnalite_abandon(event)
       break;
     }
   }
-  console.log(NouvellesFonctionnalites);
+  console.log(liste);
   console.log('-----------------------');
 
-  var index = NouvellesFonctionnalites.indexOf(selectedChoice);
+  var index = liste.indexOf(selectedChoice);
   if (index !== -1) {
-    NouvellesFonctionnalites.splice(index, 1);
+    liste.splice(index, 1);
   }
-  contentDiv.innerHTML=`<p> AAAAAAAAAAA </p>
-  <p> ${NouvellesFonctionnalites}</p>`
-  console.log(NouvellesFonctionnalites); 
+  
+  console.log(liste); 
 }
 
 
