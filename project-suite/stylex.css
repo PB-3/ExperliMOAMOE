@@ -1,8 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background:linear-gradient(to bottom right, #4286f4, #6c707a);
-
+    background: #ffffff;
 }
 
 .container {
@@ -11,33 +10,31 @@ body {
 
 .header {
     padding: 20px;
-    color: #ffffff;
+    color: #164987;
 }
 
 div.header h1.title {
     font-size: 24px;
     font-weight: 500;
-    background: linear-gradient(to bottom right, #4286f4, #6c707a);
+    background: linear-gradient(to bottom right, #ffffff, #6c707a);
 
-    border: 3px solid #000000;
+    border: 3px solid #164987;
     border-radius: 5px;
     display: inline-block;
     padding: 10px;
 }
 
 
-
-
 div.content {
     margin-top: 20px;
     width: 800px; /* Largeur du rectangle */
-    height: 500px; /* Hauteur du rectangle */
+    height: 610px; /* Hauteur du rectangle */
     margin-bottom: 20px;
     display: inline-block;
     position: relative;
-    border: 3px solid #131010;
+    border: 3px solid #164987;
     border-radius: 5px;
-    background: linear-gradient(to bottom right, #4286f4, #6c707a);
+    background: #ffffff;
 
   }
 
@@ -61,7 +58,7 @@ div.content p#titlegame {
   position: absolute;
   top: 10px;
   left: 10px;
-  border: 2px solid navy;
+  border: 2px solid #164987;
   border-radius: 10px;
   font-size: 30px;
   padding: 10px;
@@ -72,7 +69,7 @@ div.content div.game-title {
     font-size: 21px;
     font-family:'Times New Roman', Times, serif;   
     font:400;
-    color:rgb(0, 61, 71);
+    color:#164987;
 }
 .user-data {
     margin-top: 10px;
@@ -97,11 +94,32 @@ div.content div.game-title {
     color: #555555;
 }
 
+.no-bullets {
+  list-style-type: none;
+  margin: 0;
+}
+
+.no-bullets li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.no-bullets li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.no-bullets li label {
+  max-width: 90%;
+  overflow-wrap: break-word;
+}
+
+
 nav.navigation {
-    background: linear-gradient(to bottom right, #4286f4, #6c707a);
+    background: #164987;
 
     padding: 10px 0;
-    border-bottom: 1px solid #c09292;
+    border-bottom: 1px solid #164987;
     border-radius: 5px;
     border-width: 50%;
 }
@@ -121,12 +139,12 @@ nav.navigation {
     text-decoration: none;
     color: #ffffff;
     padding: 5px;
-     background: linear-gradient(to bottom right, #4286f4, #6c707a);
+     background: #8d9092;
     border-radius: 5px;
 }
 
 .navigation a:hover {
-     background: linear-gradient(to bottom right, #4286f4, #6c707a); 
+     background: #6d7175; 
 }
 
 .footer {
@@ -137,14 +155,14 @@ nav.navigation {
 
 div.sidebar-left {
     width: 2%;
-     background: linear-gradient(to bottom right, #4286f4, #6c707a); 
+     background: #ffffff; 
     float: left;
     height: 100vh;
 }
 
 div.sidebar-right {
     width: 2%;
-     background: linear-gradient(to bottom right, #4286f4, #6c707a);
+     background: #ffffff;
     float: right;
     height: 100vh;
 }
@@ -157,19 +175,19 @@ div.dropdown {
   
   span.dropbtn {
     text-decoration: none;
-    color: #000000;
+    color: #ffffff;
     margin-top:10px;
     margin-left:3px;
     font-size: 20px;
     float:left;
-     background: linear-gradient(to bottom right, #4286f4, #6c707a); 
+     background: #6c707a; 
     border-radius: 5px;
   }
   
   div.dropdown-content {
     display: none;
     position: absolute;
-     background: linear-gradient(to bottom right, #4286f4, #6c707a); 
+     background: #4286f4; 
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -182,25 +200,25 @@ div.dropdown {
   }
   
   div.dropdown-content a {
-    color: #349e60;
+    color: #ffffff;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
   
   div.dropdown-content a:hover {
-     background: linear-gradient(to bottom right, #4286f4, #6c707a); 
+     background: #164987; 
   }
   
   span.dropbtn:hover {
-     background: linear-gradient(to bottom right, #4286f4, #6c707a);
+     background: #164987;
     transition: background-color 0.3s ease;
   }
   
 
   #btn2
   {
-     background: linear-gradient(to bottom right, #4286f4, #6c707a); 
+     background: #164987; 
   }
   
   div.content button.btns {
@@ -210,19 +228,21 @@ div.dropdown {
 
 
     div.affichage-form {
-        background: linear-gradient(to bottom right, #4286f4, #6c707a);
+        background: #6d7175;
         display: inline-block;
         font-weight:530;
         font-size: 20px;
         font-family: Georgia, 'Times New Roman', Times, serif;
+        height: 100%;
       }
-      
+
+
       div.affichage-form h2 {
-        color:  rgb(218, 133, 133);
+        color:  rgb(0, 0, 0);
       }
       
       div.affichage-form label {
-        color: rgb(218, 133, 133);
+        color: rgb(0, 0, 0);
         font-weight: bold;
         margin: 20px;
       }
@@ -246,8 +266,8 @@ div.dropdown {
       
       
       div.affichage-form input[type="submit"] {
-        background: linear-gradient(to bottom right, #4286f4, #6c707a);
-        color: rgb(218, 133, 133);
+        background: #164987;
+        color: #ffffff;
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
@@ -258,13 +278,15 @@ div.dropdown {
       }
       
       div.affichage-form input[type="submit"]:hover {
-        background: linear-gradient(to bottom right, #4286f4, #6c707a);
+        background: #4286f4;
+        transition: 1s;
+        transform: translateY(20%);
       }
       
     
 
       div.recap-form {
-        color: rgb(218, 133, 133);
+        color: #000000;
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
@@ -272,16 +294,18 @@ div.dropdown {
         font-weight: bold;
         font-size: 20px;
         font-family: Georgia, 'Times New Roman', Times, serif;
+        word-wrap: break-word;
+        overflow: auto;
       }
       
       div.recap-form h2 {
-        color: white;
+        color: black;
         font-size: 24px;
         margin-bottom: 10px;
       }
       
       div.recap-form p {
-        color: white;
+        color: black;
         font-size: 18px;
         margin-bottom: 5px;
       }
@@ -293,8 +317,8 @@ div.dropdown {
       }
       
 .btn-continuer {
-        background: linear-gradient(to bottom right, #4286f4, #6c707a);
-        color:  rgb(218, 133, 133);
+        background: #164987;
+        color:  #ffffff;
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
