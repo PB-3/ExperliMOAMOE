@@ -25,12 +25,10 @@ div.header h1.title {
 }
 
 
-
-
 div.content {
     margin-top: 20px;
     width: 800px; /* Largeur du rectangle */
-    height: 500px; /* Hauteur du rectangle */
+    height: 610px; /* Hauteur du rectangle */
     margin-bottom: 20px;
     display: inline-block;
     position: relative;
@@ -96,12 +94,33 @@ div.content div.game-title {
     color: #555555;
 }
 
+.no-bullets {
+  list-style-type: none;
+  margin: 0;
+}
+
+.no-bullets li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.no-bullets li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.no-bullets li label {
+  max-width: 90%;
+  overflow-wrap: break-word;
+}
+
+
 nav.navigation {
     background: #164987;
 
-    padding: 10px 0;
+    padding: 20px 0;
     border-bottom: 1px solid #164987;
-    border-radius: 5px;
+    border-radius: 0px;
     border-width: 50%;
 }
 
@@ -134,19 +153,6 @@ nav.navigation {
     color: #ffffff;
 }
 
-div.sidebar-left {
-    width: 2%;
-     background: #ffffff; 
-    float: left;
-    height: 100vh;
-}
-
-div.sidebar-right {
-    width: 2%;
-     background: #ffffff;
-    float: right;
-    height: 100vh;
-}
 
 
 div.dropdown {
