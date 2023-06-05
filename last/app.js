@@ -1,6 +1,6 @@
 function testHTML(url, callback) {
   var contentDiv = document.querySelector(".content");
-
+  delais_affichage();
   fetch(url)
     .then((response) => response.text())
     .then((data) => {
@@ -15,6 +15,10 @@ function testHTML(url, callback) {
         error
       );
     });
+}
+function delais_affichage() {
+  let contentDiv = document.querySelector(".delais_jour");
+  contentDiv.innerHTML = `<p>${delais_jour}</p>`;
 }
 
 function element_check(event) {
@@ -53,7 +57,7 @@ var delaisMap = {
   "site-smartphones-tablettes": 4,
   "temps-chargement": 4,
   "section-actualites": 4,
-  "personnalisation": 4,
+  personnalisation: 4,
   "chargement-rapide-images": 4,
   "resolution-images": 4,
   "resolution-telechargement": 4,
@@ -65,6 +69,7 @@ var delaisMap = {
 
 // Fonction pour afficher la première étape du jeu
 function afficherEtape1() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
     <div class="game-title">
@@ -80,6 +85,7 @@ function afficherEtape1() {
 
 // Fonction pour afficher l'étape 2 du jeu
 function afficherEtape2() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("infos_projets_debut.html", function () {
     const choixForm = document.getElementById("choixForm");
@@ -92,6 +98,7 @@ function afficherEtape2() {
 
 // Fonction pour afficher l'étape 3 du jeu
 function afficherEtape3(event) {
+  delais_affichage();
   // Récupération des valeurs du formulaire
   var besoins = document.getElementById("besoins").value;
   var budget = document.getElementById("budget").value;
@@ -112,14 +119,17 @@ function afficherEtape3(event) {
   }
 
   var contentDiv = document.querySelector(".content");
-  testHTML("choix_fonctionnalites_debut.html", function () {
+  testHTML("choix_fonctionnalites_debut.html", function () { delais_affichage();
     const choixForm = document.getElementById("choixForm");
-
+    
     choixForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
       const checkboxes = document.querySelectorAll('input[name="choix"]');
+     console.log('lenght',checkboxes.length)
       checkboxes.forEach(function (checkbox) {
         var value = checkbox.value;
+      
+
         if (value === "rien-faire") rien_faire += 1;
 
         if (checkbox.checked) {
@@ -151,6 +161,7 @@ function afficherEtape3(event) {
           console.log(delais_jour);
         } else {
           choixNonSelectionnes.push(value);
+          
         }
       });
 
@@ -168,7 +179,7 @@ function afficherEtape3(event) {
 
       var contentDiv = document.querySelector(".content");
       contentDiv.innerHTML = "";
-      if (delais_jour >= 10) {
+      if (delais_jour >= 10) {  delais_affichage();
         let htmll = `<p> Choix selectionnes </p>
       <p> Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d’enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</p>
       <br>
@@ -190,7 +201,7 @@ function afficherEtape3(event) {
 
         var choixForm = document.getElementById("choixForm");
         choixForm.addEventListener("submit", afficherEtape4);
-      } else if (delais_jour < 10) {
+      } else if (delais_jour < 10) { delais_affichage();
         console.log("delais<10");
         var contentDiv = document.querySelector(".content");
 
@@ -208,7 +219,7 @@ function afficherEtape3(event) {
       ${htmll}
       <button class="btn-continuer",type=submit">Next</button>
       </form>`;
-
+       
         var btnContinuer = document.getElementById("choixForm");
         btnContinuer.addEventListener("submit", afficherEtape4);
       }
@@ -217,6 +228,7 @@ function afficherEtape3(event) {
 }
 
 function afficherEtape4(event) {
+  delais_affichage();
   console.log("etape4");
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
   const checkboxes = document.querySelectorAll('input[name="choix"]');
@@ -238,6 +250,7 @@ function afficherEtape4(event) {
 
 // Fonction pour afficher l'étape 5 du jeu
 function afficherEtape5() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("Moe_test_mid_version.html", function () {
     var choix = document.getElementById("choixForm");
@@ -268,6 +281,7 @@ function afficherEtape5() {
 
 // Fonction pour afficher l'étape 6 du jeu
 function afficherEtape6() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("site_teste_satisfait.html", function () {
     var btnContinuer = document.querySelector(".btn-continuer");
@@ -277,6 +291,7 @@ function afficherEtape6() {
 
 // Fonction pour afficher l'étape 7 du jeu
 function afficherEtape7() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("cas_choix_vacances/choix_partir_vac.html", function (event) {
     var choixForm = document.getElementById("choixForm");
@@ -285,6 +300,7 @@ function afficherEtape7() {
 }
 
 function afficherEtape8(event) {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = "";
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -301,12 +317,12 @@ function afficherEtape8(event) {
   }
 
   if (selectedChoice == "accepter" && selectedChoice != null) {
-    testHTML("cas_choix_vacances/page_accept_vac.html", function () {
+    testHTML("cas_choix_vacances/page_accept_vac.html", function () { delais_affichage();
       var choixForm = document.getElementById("choixForm");
       choixForm.addEventListener("submit", afficherEtape9);
     });
   } else if (selectedChoice == "refuser" && selectedChoice != null) {
-    testHTML("cas_choix_vacances/page_refuser_vac.html", function () {
+    testHTML("cas_choix_vacances/page_refuser_vac.html", function () { delais_affichage();
       var choixForm = document.getElementById("choixForm");
       choixForm.addEventListener("submit", afficherEtape9);
     });
@@ -316,6 +332,7 @@ function afficherEtape8(event) {
 }
 
 function afficherEtape9(event) {
+  delais_affichage();
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
   var form = event.target;
   var selectedChoice = null;
@@ -330,7 +347,7 @@ function afficherEtape9(event) {
     }
   }
 
-  if (selectedChoice === "abandonner") {
+  if (selectedChoice === "abandonner-fonctionnalite") {
     var htmlll = "";
     NouvellesFonctionnalites.forEach(function (fonctionnalite) {
       htmlll += `<li>
@@ -363,7 +380,6 @@ function afficherEtape9(event) {
     afficherEtape10();
     console.log("Vous avez choisi de résoudre le problème.");
   } else if (selectedChoice === "abandonner-fonctionnalite") {
-    afficherEtape10();
     console.log("Vous avez choisi d'abandonner la fonctionnalité.");
   } else if (selectedChoice === "laisser-choix-moe") {
     afficherEtape10();
@@ -372,6 +388,7 @@ function afficherEtape9(event) {
 }
 
 function afficherEtape10() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("page_test_supp.html", function (event) {
     var choixForm = document.getElementById("choixForm");
@@ -386,6 +403,8 @@ function afficherEtape10() {
 }
 
 function fonctionnalite_abandon(event, liste) {
+  delais_affichage();
+  console.log("fonc");
   var contentDiv = document.querySelector(".content");
 
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -400,16 +419,20 @@ function fonctionnalite_abandon(event, liste) {
       break;
     }
   }
-
+  console.log(liste);
   var index = liste.indexOf(selectedChoice);
   if (index !== -1) {
     liste.splice(index, 1);
+    console.log("delais", delais_jour);
+    delais_jour -= delaisMap[selectedChoice];
+    console.log("delais apres ", delais_jour);
+    console.log(liste);
+    afficherEtape10();
   }
-
-  afficherEtape10();
 }
 
 function afficherEtape11(event) {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
 
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -425,7 +448,6 @@ function afficherEtape11(event) {
     }
   }
 
-  
   if (selectedChoice === "ne-faire-aucun-test") {
     afficher_9_bis();
   } else {
@@ -434,24 +456,25 @@ function afficherEtape11(event) {
 }
 
 function afficher_page_9() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("Correction_problemes_fin.html", function (event) {
     var choixForm = document.getElementById("choixForm");
-    choixForm.removeEventListener("submit", afficher_page_9); // Supprime l'écouteur d'événements pour éviter les doublons
     choixForm.addEventListener("submit", afficherEtape12);
   });
 }
 
 function afficher_9_bis() {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("aucun_test_page9.html", function (event) {
-    var choixForm = document.getElementById("choixForm");
-    choixForm.removeEventListener("submit", afficher_9_bis); // Supprime l'écouteur d'événements pour éviter les doublons
-    choixForm.addEventListener("submit", afficherEtape12);
+    var btnContinuer = document.querySelector(".btn-continuer");
+    btnContinuer.addEventListener("click", page_fin);
   });
 }
 
 function afficherEtape12(event) {
+  delais_affichage();
   var contentDiv = document.querySelector(".content");
 
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -483,10 +506,13 @@ function afficherEtape12(event) {
 }
 
 function page_fin() {
+  
   var contentDiv = document.querySelector(".content");
   testHTML("pagefin.html", function (event) {
-    // Code de la fonction callback si nécessaire
+    contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>`;
+    delais_affichage();  
   });
 }
 
 afficherEtape1();
+
