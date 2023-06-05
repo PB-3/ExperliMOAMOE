@@ -14,12 +14,27 @@ function testHTML(url, callback) {
     });
 }
 
+function element_check(event) {
+  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+  var form = event.target;
+  var selectedChoice = [];
 
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    if (element.type === 'radio' && element.checked) {
+      selectedChoice.push(element.value);
+    }
+  }
+
+  console.log(selectedChoice);
+  return selectedChoice;
+}
 
 
 
 var delais_jour = 0 ;
 var choix_let_MOE = 0 ; 
+var rien_faire = 0;
 var besoinsValue ;
 var budgetValue;
 var delaisValue ;
@@ -31,6 +46,21 @@ var choixNonSelectionnesListe=``;
 var choixSelectionnesListe=``;
 var NouvellesFonctionnalites = [];
 var NouvellesFonctionnalites = [];
+var delaisMap = {
+  'bouton-partage': 2,
+  'resolution-caracteres-speciaux': 2,
+  'site-smartphones-tablettes': 4,
+  'temps-chargement': 4,
+  'section-actualites': 4,
+  'personnalisation': 4,
+  'chargement-rapide-images': 4,
+  'resolution-images': 4,
+  'resolution-telechargement': 4,
+  'recherche-avancee': 5,
+  'traduction-anglais': 6,
+  'site-tous-navigateurs': 4,
+  'reduction-donnees': 5
+};
 
 // Fonction pour afficher la première étape du jeu
 function afficherEtape1() {
@@ -52,45 +82,82 @@ function afficherEtape1() {
 function afficherEtape2() {
   var contentDiv = document.querySelector(".content");
   testHTML("infos_projets_debut.html", function() {
-    var btnContinuer = document.querySelector(".btn-continuer");
-    btnContinuer.addEventListener("click", afficherEtape3);
+    const choixForm = document.getElementById('choixForm');
+    choixForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+      afficherEtape3(event);
+    });
   });
 }
-
+  
 // Fonction pour afficher l'étape 3 du jeu
-function afficherEtape3() {
+function afficherEtape3(event) {
+  
+
+    // Récupération des valeurs du formulaire
+    var besoins = document.getElementById('besoins').value;
+    var budget = document.getElementById('budget').value;
+    var delais = document.getElementById('delais').value;
+    var reunionSelect = document.getElementById('reunionSelect').value;
+    var objectif = document.getElementById('objectif').value;
+
+  // delais jour 
+
+  if(reunionSelect=="3jours"){delais_jour+=2}
+  if(reunionSelect=="2semaine"){delais_jour+=5}
+  if(reunionSelect=="1mois"){delais_jour+=8}
+
+
   var contentDiv = document.querySelector(".content");
   testHTML("choix_fonctionnalites_debut.html", function() {
     const choixForm = document.getElementById('choixForm');
-  
+
     choixForm.addEventListener('submit', function(event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
- 
       const checkboxes = document.querySelectorAll('input[name="choix"]');
       checkboxes.forEach(function(checkbox) {
+        var value = checkbox.value;
+        if(value === "rien-faire") rien_faire+=1;
         
         if (checkbox.checked) {
           choixSelectionnes.push(checkbox.value);
-          console.log(checkbox.value);
-          if (checkbox.value == 'site-smartphones-tablettes') {
-            NouvellesFonctionnalites.push(checkbox.value);
+         
+          // console.log(value);
+          if (value == 'site-smartphones-tablettes') {
+            NouvellesFonctionnalites.push(value);
             
-          } else if (checkbox.value == 'bouton-partage') {
-            NouvellesFonctionnalites.push(checkbox.value);
-          } else if (checkbox.value == 'recherche-avancee') {
-            NouvellesFonctionnalites.push(checkbox.value);
-          } else if (checkbox.value == 'section-actualites') {
-            NouvellesFonctionnalites.push(checkbox.value);
-          } else if (checkbox.value == 'personnalisation') {
-            NouvellesFonctionnalites.push(checkbox.value);
-          } else if (checkbox.value == 'traduction-anglais') {
-            NouvellesFonctionnalites.push(checkbox.value);
+          } else if (value == 'bouton-partage') {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == 'recherche-avancee') {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == 'section-actualites') {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == 'personnalisation') {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == 'traduction-anglais') {
+            NouvellesFonctionnalites.push(value);
           }
-            
+
+          // Vérifier la valeur de la case cochée et ajouter les délais correspondants
+
+      
+      for (var key in delaisMap) {
+        if (key === value) {
+          delais_jour += delaisMap[key];
+          break;
+        }
+        
+      }
+      
+
+      console.log(delais_jour);
+
+
         }
         else {
-          choixNonSelectionnes.push(checkbox.value);
+          choixNonSelectionnes.push(value);
         }
+
       });
      
       // Construction de la liste des choix sélectionnés
@@ -136,8 +203,15 @@ function afficherEtape3() {
 
 
 function afficherEtape4(event) {
-  event.preventDefault();
-  //fonctionnalite_abandon(event,optionsList);
+  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+      const checkboxes = document.querySelectorAll('input[name="choix"]');
+      checkboxes.forEach(function(checkbox) {
+        if(value === "rien-faire") rien_faire+=1;
+        if (checkbox.checked) {
+          delais_jour-= delaisMap[checkbox.value];
+          console.log(delais_jour);
+        }});
+
 
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML=`<button class="btn-continuer">Next</button>`;

@@ -1,6 +1,6 @@
 <div class="affichage-form">
     <h2>Informations du projet</h2>
-    <form id="form">
+    <form id="choixForm">
       <label for="besoins">Besoins du projet :</label>
       <textarea id="besoins" name="besoins" rows="4" cols="50"></textarea>
   
@@ -25,18 +25,16 @@
       <br>
       <label for="reunionSelec">Réccurrence réunions :</label>
       <select id="reunionSelect" name="reunionSelect">
-        <option value="3 jours">Une réunion tous les trois jours</option>
-        <option value="par semaine">Une réunion par semaine</option>
-        <option value="toutes les deux semaines">Une réunion toutes les deux semaines</option>
-        <option value="par mois">Une réunion par mois</option>
+        <option value="3jours">Une réunion tous les trois jours</option>
+        <option value="1semaine">Une réunion par semaine</option>
+        <option value="2semaines">Une réunion toutes les deux semaines</option>
+        <option value="1mois">Une réunion par mois</option>
       </select>
       <br>
   
       <label for="objectif">Objectif principal :</label>
       <textarea id="objectif" name="objectif" rows="4" cols="50"></textarea>
-  
+      <button class="btn-continuer" ,type="submit">Continuer</button>
     </form>
-
-    <button class="btn-continuer">Continuer</button>
   </div>
   
