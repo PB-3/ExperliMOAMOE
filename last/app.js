@@ -91,15 +91,7 @@ function afficherEtape2() {
     const choixForm = document.getElementById("choixForm");
     choixForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
-      afficherEtape3(event);
-    });
-  });
-}
-
-// Fonction pour afficher l'étape 3 du jeu
-function afficherEtape3(event) {
-  delais_affichage();
-  // Récupération des valeurs du formulaire
+       // Récupération des valeurs du formulaire
   var besoins = document.getElementById("besoins").value;
   var budget = document.getElementById("budget").value;
   var delais = document.getElementById("delais").value;
@@ -117,25 +109,35 @@ function afficherEtape3(event) {
   if (reunionSelect == "1mois") {
     delais_jour += 8;
   }
+      afficherEtape3();
+    });
+  });
+}
+
+// Fonction pour afficher l'étape 3 du jeu
+function afficherEtape3() {
+  delais_affichage();
 
   var contentDiv = document.querySelector(".content");
-  testHTML("choix_fonctionnalites_debut.html", function () { delais_affichage();
+  testHTML("choix_fonctionnalites_debut.html", function () {
+    delais_affichage();
     const choixForm = document.getElementById("choixForm");
-    
+
     choixForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
+
       const checkboxes = document.querySelectorAll('input[name="choix"]');
-     console.log('lenght',checkboxes.length)
+      console.log('lenght', checkboxes.length)
+
+      var isAnyCheckboxChecked = false; // Variable pour suivre si au moins une case est cochée
+
       checkboxes.forEach(function (checkbox) {
         var value = checkbox.value;
-      
-
         if (value === "rien-faire") rien_faire += 1;
-
         if (checkbox.checked) {
-          choixSelectionnes.push(checkbox.value);
+          isAnyCheckboxChecked = true; // Met à true si une case est cochée
+          choixSelectionnes.push(value);
 
-          // console.log(value);
           if (value == "site-smartphones-tablettes") {
             NouvellesFonctionnalites.push(value);
           } else if (value == "bouton-partage") {
@@ -150,85 +152,103 @@ function afficherEtape3(event) {
             NouvellesFonctionnalites.push(value);
           }
 
-          // Vérifier la valeur de la case cochée et ajouter les délais correspondants
           for (var key in delaisMap) {
             if (key === value) {
               delais_jour += delaisMap[key];
               break;
             }
           }
-
-          console.log(delais_jour);
-        } else {
-          choixNonSelectionnes.push(value);
-          
         }
       });
 
-      // Construction de la liste des choix sélectionnés
-      choixSelectionnes.forEach(function (choix) {
-        choixSelectionnesListe += `<li>${choix}</li>`;
-      });
-      choixSelectionnesListe += "</ul>";
-
-      // Construction de la liste des choix non sélectionnés
-      choixNonSelectionnes.forEach(function (choix) {
-        choixNonSelectionnesListe += `<li>${choix}</li>`;
-      });
-      choixNonSelectionnesListe += "</ul>";
-
-      var contentDiv = document.querySelector(".content");
-      contentDiv.innerHTML = "";
-      if (delais_jour >= 10) {  delais_affichage();
-        let htmll = `<p> Choix selectionnes </p>
-      <p> Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d’enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</p>
-      <br>
-      <p> supprimer un ou plusieurs choix parmi : </p>`;
-
+      if (isAnyCheckboxChecked) {
+        // Au moins une case est cochée, permet la soumission du formulaire
         choixSelectionnes.forEach(function (choix) {
-          htmll += `  
-          <ul class="no-bullets">
-            <li><input type="checkbox" id="${choix}" name="choix" value="${choix}">
-            <label for="${choix}">${choix}</label></li>
-          </ul>`;
+          choixSelectionnesListe += `<li>${choix}</li>`;
+        });
+        choixSelectionnesListe += "</ul>";
+
+        var choixNonSelectionnesListe = ""; // Réinitialise la liste des choix non sélectionnés
+
+        checkboxes.forEach(function (checkbox) {
+          if (!checkbox.checked) {
+            choixNonSelectionnesListe += `<li>${checkbox.value}</li>`;
+          }
         });
 
-        contentDiv.innerHTML += `
-        <form id="choixForm">
-          ${htmll}
-          <button class="btn-continuer">Next</button>
-        </form>`;
+        choixNonSelectionnesListe += "</ul>";
 
-        var choixForm = document.getElementById("choixForm");
-        choixForm.addEventListener("submit", afficherEtape4);
-      } else if (delais_jour < 10) { delais_affichage();
-        console.log("delais<10");
         var contentDiv = document.querySelector(".content");
+        contentDiv.innerHTML = "";
 
-        let htmll = `<p> Le chef de projet vous indique que son équipe n’aura pas de difficulté à répondre à vos demandes et que les délais seront largement respectés. Il vous propose de rajouter quelques fonctionnalités qui s'inscrivent dans les délais demandés. (Attention au budget quand même)</p>`;
-        choixNonSelectionnes.forEach(function (choix) {
-          htmll += `
-          <ul class="no-bullets">
-            <li><input type="checkbox" id="${choix}" name="choix" value="${choix}">
-            <label for="${choix}">${choix}</label></li>
-          </ul>
-        `;
-        });
-        contentDiv.innerHTML += ` 
-      <form id="choixForm">
-      ${htmll}
-      <button class="btn-continuer",type=submit">Next</button>
-      </form>`;
-       
-        var btnContinuer = document.getElementById("choixForm");
-        btnContinuer.addEventListener("submit", afficherEtape4);
+        if (delais_jour >= 10) {
+          delais_affichage();
+          let htmll = `
+            <h1>Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d'enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</h1>
+            <br>
+            <p>Supprimer un ou plusieurs choix parmi :</p>`;
+
+          choixSelectionnes.forEach(function (choix) {
+            htmll += `<ul class="no-bullets">
+              <li>
+                <input type="checkbox" id="${choix}" name="choix" value="${choix}">
+                <label for="${choix}">${choix}</label>
+              </li>
+            </ul>`;
+          });
+
+          contentDiv.innerHTML += `
+            <form id="choixForm">
+              ${htmll}
+              <button class="btn-continuer">Next</button>
+            </form>`;
+
+          var choixForm = document.getElementById("choixForm");
+          choixForm.addEventListener("submit", afficherEtape4);
+        } 
+        else if (delais_jour < 10) {
+
+          delais_affichage();
+          console.log("delais<10");
+          var contentDiv = document.querySelector(".content");
+
+          let htmll = `<p>Choix non sélectionnés :</p>
+    
+            <p>Le chef de projet vous indique que son équipe n'aura pas de difficulté à répondre à vos demandes et que les délais seront largement respectés. Il vous propose de rajouter quelques fonctionnalités qui s'inscrivent dans les délais demandés (Attention au budget quand même).</p>`;
+
+          checkboxes.forEach(function (checkbox) {
+            if (!checkbox.checked) {
+              htmll += `<ul class="no-bullets">
+                <li>
+                  <input type="checkbox" id="${checkbox.value}" name="choix" value="${checkbox.value}">
+                  <label for="${checkbox.value}">${checkbox.value}</label>
+                </li>
+              </ul>`;
+            }
+          });
+
+          contentDiv.innerHTML += `
+            <form id="choixForm">
+              ${htmll}
+              <button class="btn-continuer" type="submit">Next</button>
+            </form>`;
+
+          var btnContinuer = document.getElementById("choixForm");
+          btnContinuer.addEventListener("submit", afficherEtape4);
+        }
+      } else {
+        // Aucune case n'est cochée, empêche la soumission du formulaire
+        alert("Veuillez sélectionner au moins une option.");
+        return false;
       }
     });
   });
 }
 
+
 function afficherEtape4(event) {
   delais_affichage();
+  let isAnyCheckboxChecked =false;
   console.log("etape4");
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
   const checkboxes = document.querySelectorAll('input[name="choix"]');
@@ -236,6 +256,12 @@ function afficherEtape4(event) {
     value = checkbox.value;
     if (value === "rien-faire") rien_faire += 1;
     if (checkbox.checked) {
+      isAnyCheckboxChecked = true;}});
+
+    if(isAnyCheckboxChecked){
+     
+    checkboxes.forEach(function (checkbox){
+      if(checkbox.checked){
       if (delais_jour >= 10) {
         delais_jour -= delaisMap[checkbox.value];
       } else if (delais_jour < 10) {
@@ -243,7 +269,14 @@ function afficherEtape4(event) {
       }
       console.log(delais_jour);
     }
+    
   });
+}
+else{
+  alert("Veuillez sélectionner au moins une option.");
+  return false;
+}
+  
 
   afficherEtape5();
 }
@@ -266,6 +299,11 @@ function afficherEtape5() {
           selectedChoice = element.value;
           break;
         }
+      }
+      if(selectedChoice==null)
+      {
+        alert("Veuillez sélectionner au moins une option.");
+        return false;
       }
       if (selectedChoice === "tester") {
         delais_jour += 5;
@@ -302,7 +340,7 @@ function afficherEtape7() {
 function afficherEtape8(event) {
   delais_affichage();
   var contentDiv = document.querySelector(".content");
-  contentDiv.innerHTML = "";
+
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
   var form = event.target;
   var selectedChoice = null;
@@ -327,7 +365,8 @@ function afficherEtape8(event) {
       choixForm.addEventListener("submit", afficherEtape9);
     });
   } else if (selectedChoice == null) {
-    afficherEtape7();
+    alert("Veuillez sélectionner au moins une option.");
+    return false;
   }
 }
 
@@ -346,7 +385,10 @@ function afficherEtape9(event) {
       break;
     }
   }
-
+  if (selectedChoice == null) {
+    alert("Veuillez sélectionner au moins une option.");
+    return false;
+  }
   if (selectedChoice === "abandonner-fonctionnalite") {
     var htmlll = "";
     NouvellesFonctionnalites.forEach(function (fonctionnalite) {
@@ -371,7 +413,10 @@ function afficherEtape9(event) {
     choixForm.addEventListener("submit", function (event) {
       fonctionnalite_abandon(event, NouvellesFonctionnalites);
     });
-
+    if (selectedChoice == null) {
+      alert("Veuillez sélectionner au moins une option.");
+      return false;
+    }
     console.log("Vous avez choisi d'abandonner une autre fonctionnalité.");
   } else if (selectedChoice === "ne-rien-faire") {
     afficherEtape10();
@@ -419,6 +464,7 @@ function fonctionnalite_abandon(event, liste) {
       break;
     }
   }
+  
   console.log(liste);
   var index = liste.indexOf(selectedChoice);
   if (index !== -1) {
@@ -447,7 +493,10 @@ function afficherEtape11(event) {
       break;
     }
   }
-
+  if (selectedChoice == null) {
+    alert("Veuillez sélectionner au moins une option.");
+    return false;
+  }
   if (selectedChoice === "ne-faire-aucun-test") {
     afficher_9_bis();
   } else {
@@ -489,7 +538,10 @@ function afficherEtape12(event) {
       break;
     }
   }
-
+  if (selectedChoice == null) {
+    alert("Veuillez sélectionner au moins une option.");
+    return false;
+  }
   var choixx = {
     "corriger-mineurs": 2,
     "corriger-ensemble": 3,
