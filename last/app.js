@@ -561,10 +561,17 @@ function page_fin() {
   
   var contentDiv = document.querySelector(".content");
   testHTML("pagefin.html", function (event) {
-    contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>`;
+    contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>
+    <button class="btn-continuer" id="quizzz", type="submit">Quizz</button>`;
     delais_affichage();  
+    btnContinuer=document.getElementById('quizzz');
+    btnContinuer.addEventListener('click',quizz);
+
   });
 }
-
+function quizz()
+{
+  window.location.href='quizzMOA.html';
+}
 afficherEtape1();
 
