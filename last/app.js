@@ -78,8 +78,9 @@ function afficherEtape1() {
     <div class="game-title">
       <h1>ExperliMOAMOE</h1>
       <p>Dans cette partie du jeu, vous incarnez le rôle de la Maîtrise d'Œuvre (MOE). Votre responsabilité est de mettre en œuvre le projet en tenant compte des besoins, du budget et des délais établis par la Maîtrise d'Ouvrage (MOA). Vous devrez créer une structure de pilotage pour assurer un suivi régulier avec la MOA, où vous effectuerez des évaluations périodiques pour mesurer l'avancement du projet. Votre objectif principal est de respecter les délais et le budget tout en garantissant que le site web soit performant au maximum de ses capacités.</p>
-      <button class="btn-continuer">Continuer</button>
+     
     </div>
+    <button class="btn-continuer">Continuer</button>
   `;
   updateProgressBar();
   var btnContinuer = document.querySelector(".btn-continuer");
@@ -192,7 +193,7 @@ function afficherEtape3() {
           delais_affichage();
           updateProgressBar();
           let htmll = `
-            <h1>Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d'enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</h1>
+            <p>Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d'enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</p>
             <br>
             <p>Supprimer un ou plusieurs choix parmi :</p>`;
 
@@ -370,12 +371,16 @@ function afficherEtape8(event) {
   }
 
   if (selectedChoice == "accepter" && selectedChoice != null) {
-    testHTML("cas_choix_vacances/page_accept_vac.html", function () { delais_affichage();updateProgressBar();
-      var choixForm = document.getElementById("choixForm");
-      choixForm.addEventListener("submit", afficherEtape9);
+    testHTML("cas_choix_vacances/page_accept_vac.html", function () {
+      delais_affichage();
+      updateProgressBar();
+      var choixForm = document.querySelector('.btn-continuer');
+      choixForm.addEventListener("click", afficherEtape10);
     });
   } else if (selectedChoice == "refuser" && selectedChoice != null) {
-    testHTML("cas_choix_vacances/page_refuser_vac.html", function () { delais_affichage();updateProgressBar();
+    testHTML("cas_choix_vacances/page_refuser_vac.html", function () {
+      delais_affichage();
+      updateProgressBar();
       var choixForm = document.getElementById("choixForm");
       choixForm.addEventListener("submit", afficherEtape9);
     });
@@ -383,8 +388,8 @@ function afficherEtape8(event) {
     alert("Veuillez sélectionner au moins une option.");
     return false;
   }
+  
 }
-
 function afficherEtape9(event) {
   delais_affichage();
   updateProgressBar();
@@ -401,10 +406,12 @@ function afficherEtape9(event) {
       break;
     }
   }
+
   if (selectedChoice == null) {
     alert("Veuillez sélectionner au moins une option.");
     return false;
   }
+
   if (selectedChoice === "abandonner-fonctionnalite") {
     var htmlll = "";
     NouvellesFonctionnalites.forEach(function (fonctionnalite) {
@@ -419,7 +426,7 @@ function afficherEtape9(event) {
     <p>Quelle fonctionnalité souhaitez-vous annuler?</p>
     <p>Choix disponible :</p>
     <form id="choixForm">
-      <ul>
+      <ul class="no-bullets">
         ${htmlll}
       </ul>
       <button class="btn-continuer" type="submit">Next</button>
@@ -429,10 +436,12 @@ function afficherEtape9(event) {
     choixForm.addEventListener("submit", function (event) {
       fonctionnalite_abandon(event, NouvellesFonctionnalites);
     });
+
     if (selectedChoice == null) {
       alert("Veuillez sélectionner au moins une option.");
       return false;
     }
+
     console.log("Vous avez choisi d'abandonner une autre fonctionnalité.");
   } else if (selectedChoice === "ne-rien-faire") {
     afficherEtape10();
@@ -448,6 +457,8 @@ function afficherEtape9(event) {
   }
 }
 
+
+
 function afficherEtape10() {
   delais_affichage();
   updateProgressBar();
@@ -461,8 +472,22 @@ function afficherEtape10() {
 
       choixForm.addEventListener("submit", afficherEtape11);
     }
+
+    // Ajouter un écouteur d'événement pour les changements de choix
+    var choixRadios = choixForm.elements["choix"];
+    for (var i = 0; i < choixRadios.length; i++) {
+      choixRadios[i].addEventListener("change", function (event) {
+        // Récupérer la valeur du choix sélectionné
+        var selectedChoice = event.target.value;
+        console.log("Choix sélectionné :", selectedChoice);
+      });
+    }
+
+    
   });
 }
+
+
 
 function fonctionnalite_abandon(event, liste) {
   delais_affichage();

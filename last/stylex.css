@@ -14,7 +14,7 @@ body {
 }
 
 div.header h1.title {
-    font-size: 24px;
+    font-size: 50px;
     font-weight: 500;
     background: linear-gradient(to bottom right, #ffffff, #6c707a);
 
@@ -27,14 +27,17 @@ div.header h1.title {
 
 div.content {
     margin-top: 20px;
-    width: 800px; /* Largeur du rectangle */
-    height: 610px; /* Hauteur du rectangle */
+    width: 1000px; /* Largeur du rectangle */
+    height: 800px; /* Hauteur du rectangle */
     margin-bottom: 20px;
     display: inline-block;
     position: relative;
     border: 3px solid #164987;
     border-radius: 5px;
     background: #ffffff;
+    font-family:Lato, Arial, Helvetica, sans-serif;
+    font :400 ;
+    font-size: 20px;
 
   }
 
@@ -45,14 +48,7 @@ div.content {
 
   }
 
-div.content div.btns  {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-right: 10px;
 
-}
 
 div.content p#titlegame {
   position: absolute;
@@ -60,14 +56,14 @@ div.content p#titlegame {
   left: 10px;
   border: 2px solid #164987;
   border-radius: 10px;
-  font-size: 30px;
+  font-size: 50px;
   padding: 10px;
   color: whitesmoke;
 }
 div.content div.game-title {
     position: absolute ;
-    font-size: 21px;
-    font-family:'Times New Roman', Times, serif;   
+    font-size: 38px;
+    font-family:Lato, Arial, Helvetica, sans-serif; 
     font:400;
     color:#164987;
 }
@@ -219,7 +215,7 @@ div.dropdown {
         display: inline-block;
         font-weight:530;
         font-size: 20px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-family: Lato, Arial, Helvetica, sans-serif;
         height: 100%;
       }
 
@@ -237,6 +233,7 @@ div.dropdown {
       
       div.affichage-form textarea {
         width: 90%;
+        padding-bottom: 15%;
         border-radius: 5px;
         margin-bottom: 10px;
         resize: none;
@@ -261,7 +258,7 @@ div.dropdown {
         cursor: pointer;
         font-weight:bold;
         font-size: 20px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-family:Lato, Arial, Helvetica, sans-serif;
       }
       
       div.affichage-form input[type="submit"]:hover {
@@ -280,7 +277,7 @@ div.dropdown {
         cursor: pointer;
         font-weight: bold;
         font-size: 20px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-family: Lato, Arial, Helvetica, sans-serif;
         word-wrap: break-word;
         overflow: auto;
       }
@@ -312,9 +309,13 @@ div.dropdown {
         cursor: pointer;
         font-weight: bold;
         font-size: 20px;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        margin-top: 10px;
+        font-family: Lato, Arial, Helvetica, sans-serif;
+        position: absolute;
+        bottom: 10%;
+        left: 45%;
+     
         transition: 1s;
+        
       }
       
       .progress-bar {
@@ -338,6 +339,15 @@ div.dropdown {
         position: relative; /* Position relative pour les pseudo-éléments */
     }
     
-    
+div.content
+{
+  font-family:Lato, Arial, Helvetica, sans-serif;
+  color:black;
+  font-size: 25px;
+  
+}    
       
-      
+#choixForm{
+  font-size: 20px;
+
+}
