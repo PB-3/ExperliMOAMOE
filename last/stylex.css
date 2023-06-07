@@ -317,6 +317,27 @@ div.dropdown {
         transition: 1s;
       }
       
-   
+      .progress-bar {
+        width: 200px; /* Longueur de 100 pixels */
+        height: 20px;
+        background: linear-gradient(to right, #4caf50, #eb4343);
+        border-radius: 10px; /* Valeur de bordure personnalisée */
+        margin: 0 auto; /* Centrer horizontalement */
+        display: flex;
+        flex-direction: row-reverse; /* Inverser l'ordre d'affichage des éléments enfants */
+        overflow: hidden; /* Cacher le contenu qui dépasse */
+        position: relative; /* Position relative pour les pseudo-éléments */
+    }
+    
+    .progress {
+        width: 0%;
+        height: 100%;
+        background: #000000;
+        border-radius: 0 10px 10px 0; /* Arrondi seulement sur le côté droit */
+        transition: width 0.3s ease-in-out;
+        position: relative; /* Position relative pour les pseudo-éléments */
+    }
+    
+    
       
       

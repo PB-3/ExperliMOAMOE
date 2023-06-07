@@ -586,7 +586,8 @@ function page_fin() {
   testHTML("pagefin.html", function (event) {
     contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>
     <button class="btn-continuer" id="quizzz", type="submit">Quizz</button>`;
-    delais_affichage();  
+    delais_affichage(); 
+    updateProgressBar(); 
     btnContinuer=document.getElementById('quizzz');
     btnContinuer.addEventListener('click',quizz);
 

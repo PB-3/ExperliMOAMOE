@@ -52,3 +52,22 @@ body {
 
   }
   
+  div.result {
+    background:none;
+    padding-left: 10px;
+    width: 400px;
+    height: 800px;
+    margin-left: 2%;
+    border: 3px solid #000000;
+    border-radius: 5px;
+    color:whitesmoke;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font : 400;
+    font-size: 20px;
+    }
+
+  div#global
+  {
+    display: flex;
+    position: relative;
+  }

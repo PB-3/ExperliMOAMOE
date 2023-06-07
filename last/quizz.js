@@ -5,12 +5,18 @@ let answers = ['b', 'b', 'd', 'a', 'd', 'd', 'd', 'd', 'a', 'd'];
 
 function reponsesQuizz(event) {
   event.preventDefault();
-
+  var contentDiv = document.querySelector('.result');
+  let res=document.getElementById('restart');
+  res.addEventListener('click',function (){
+    window.location.href = "quizzMOA.html";
+    return;
+  })
+  contentDiv.innerHTML=``;
   let isAnyCheckboxChecked = false;
   let htmlll = '';
 
   for (let i = 0; i < 10; i++) {
-    const checkboxes = document.querySelectorAll(`input[name="q${i}"]:checked`);
+    const checkboxes = document.querySelectorAll(`input[name="q${i+1}"]:checked`);
 
     if (checkboxes.length > 0) {
       isAnyCheckboxChecked = true;
@@ -31,6 +37,5 @@ function reponsesQuizz(event) {
     return false;
   }
 
-  var contentDiv = document.querySelector('.quizzdiv');
   contentDiv.innerHTML += htmlll;
 }
