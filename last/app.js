@@ -66,6 +66,8 @@ var delaisMap = {
   "site-tous-navigateurs": 4,
   "reduction-donnees": 5,
 };
+var pourcentage =0 ;
+
 
 // Fonction pour afficher la première étape du jeu
 function afficherEtape1() {
@@ -575,3 +577,35 @@ function quizz()
 }
 afficherEtape1();
 
+
+// Utilisez cette fonction pour mettre à jour la barre de progression à chaque changement de pourcentage
+updateProgressBar();
+
+function updateProgressBar() {
+var pourcentage = (delais_jour/50) * 100
+
+if (delais_jour>= 48 ) {
+  if (delais_jour<=50 ) {
+    var pourcentageOppose = Math.abs(pourcentage - 100);
+    var progressBar = document.querySelector(".progress");
+    progressBar.style.width = pourcentageOppose + "%";
+  }
+  
+    
+  else {
+    var progressBar = document.querySelector(".progress");
+  progressBar.style.width = "100%"; // Remplir la barre à 100%
+  progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
+  progressBar.innerHTML = "Délai dépassé /!\\";
+
+  }  
+}
+
+else{
+var pourcentageOppose = Math.abs(pourcentage - 100);
+var pourcentageOppose = pourcentageOppose + (pourcentageOppose * 0.05);
+
+var progressBar = document.querySelector(".progress");
+progressBar.style.width = pourcentageOppose + "%";
+}
+}
