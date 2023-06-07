@@ -71,6 +71,7 @@ var pourcentage =0 ;
 
 // Fonction pour afficher la première étape du jeu
 function afficherEtape1() {
+  updateProgressBar();
   delais_affichage();
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
@@ -80,13 +81,14 @@ function afficherEtape1() {
       <button class="btn-continuer">Continuer</button>
     </div>
   `;
-
+  updateProgressBar();
   var btnContinuer = document.querySelector(".btn-continuer");
   btnContinuer.addEventListener("click", afficherEtape2);
 }
 
 // Fonction pour afficher l'étape 2 du jeu
 function afficherEtape2() {
+  updateProgressBar();
   delais_affichage();
   var contentDiv = document.querySelector(".content");
   testHTML("infos_projets_debut.html", function () {
@@ -111,6 +113,7 @@ function afficherEtape2() {
   if (reunionSelect == "1mois") {
     delais_jour += 8;
   }
+      updateProgressBar();
       afficherEtape3();
     });
   });
@@ -118,11 +121,13 @@ function afficherEtape2() {
 
 // Fonction pour afficher l'étape 3 du jeu
 function afficherEtape3() {
+  updateProgressBar();
   delais_affichage();
 
   var contentDiv = document.querySelector(".content");
   testHTML("choix_fonctionnalites_debut.html", function () {
     delais_affichage();
+    updateProgressBar();
     const choixForm = document.getElementById("choixForm");
 
     choixForm.addEventListener("submit", function (event) {
@@ -185,6 +190,7 @@ function afficherEtape3() {
 
         if (delais_jour >= 10) {
           delais_affichage();
+          updateProgressBar();
           let htmll = `
             <h1>Le chef de projet vous indique que les délais sont envisageables si tout se passe parfaitement, mais son expérience lui a appris que ce cas n'arrive que très rarement. Il vous propose de rallonger les délais ou d'enlever certaines fonctionnalités. Vous ne voulez pas rallonger les délais.</h1>
             <br>
@@ -211,6 +217,7 @@ function afficherEtape3() {
         else if (delais_jour < 10) {
 
           delais_affichage();
+          updateProgressBar();
           console.log("delais<10");
           var contentDiv = document.querySelector(".content");
 
@@ -249,6 +256,7 @@ function afficherEtape3() {
 
 
 function afficherEtape4(event) {
+  updateProgressBar();
   delais_affichage();
   let isAnyCheckboxChecked =false;
   console.log("etape4");
@@ -279,13 +287,14 @@ else{
   return false;
 }
   
-
+  updateProgressBar();
   afficherEtape5();
 }
 
 // Fonction pour afficher l'étape 5 du jeu
 function afficherEtape5() {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
   testHTML("Moe_test_mid_version.html", function () {
     var choix = document.getElementById("choixForm");
@@ -314,6 +323,7 @@ function afficherEtape5() {
         rien_faire += 1;
         console.log("rien");
       }
+      updateProgressBar();
       afficherEtape6();
     });
   });
@@ -322,6 +332,7 @@ function afficherEtape5() {
 // Fonction pour afficher l'étape 6 du jeu
 function afficherEtape6() {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
   testHTML("site_teste_satisfait.html", function () {
     var btnContinuer = document.querySelector(".btn-continuer");
@@ -332,6 +343,7 @@ function afficherEtape6() {
 // Fonction pour afficher l'étape 7 du jeu
 function afficherEtape7() {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
   testHTML("cas_choix_vacances/choix_partir_vac.html", function (event) {
     var choixForm = document.getElementById("choixForm");
@@ -341,6 +353,7 @@ function afficherEtape7() {
 
 function afficherEtape8(event) {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
 
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -357,12 +370,12 @@ function afficherEtape8(event) {
   }
 
   if (selectedChoice == "accepter" && selectedChoice != null) {
-    testHTML("cas_choix_vacances/page_accept_vac.html", function () { delais_affichage();
+    testHTML("cas_choix_vacances/page_accept_vac.html", function () { delais_affichage();updateProgressBar();
       var choixForm = document.getElementById("choixForm");
       choixForm.addEventListener("submit", afficherEtape9);
     });
   } else if (selectedChoice == "refuser" && selectedChoice != null) {
-    testHTML("cas_choix_vacances/page_refuser_vac.html", function () { delais_affichage();
+    testHTML("cas_choix_vacances/page_refuser_vac.html", function () { delais_affichage();updateProgressBar();
       var choixForm = document.getElementById("choixForm");
       choixForm.addEventListener("submit", afficherEtape9);
     });
@@ -374,6 +387,7 @@ function afficherEtape8(event) {
 
 function afficherEtape9(event) {
   delais_affichage();
+  updateProgressBar();
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
   var form = event.target;
   var selectedChoice = null;
@@ -436,6 +450,7 @@ function afficherEtape9(event) {
 
 function afficherEtape10() {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
   testHTML("page_test_supp.html", function (event) {
     var choixForm = document.getElementById("choixForm");
@@ -451,6 +466,7 @@ function afficherEtape10() {
 
 function fonctionnalite_abandon(event, liste) {
   delais_affichage();
+  updateProgressBar();
   console.log("fonc");
   var contentDiv = document.querySelector(".content");
 
@@ -475,12 +491,14 @@ function fonctionnalite_abandon(event, liste) {
     delais_jour -= delaisMap[selectedChoice];
     console.log("delais apres ", delais_jour);
     console.log(liste);
+    updateProgressBar();
     afficherEtape10();
   }
 }
 
 function afficherEtape11(event) {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
 
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -508,6 +526,7 @@ function afficherEtape11(event) {
 
 function afficher_page_9() {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
   testHTML("Correction_problemes_fin.html", function (event) {
     var choixForm = document.getElementById("choixForm");
@@ -517,6 +536,7 @@ function afficher_page_9() {
 
 function afficher_9_bis() {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
   testHTML("aucun_test_page9.html", function (event) {
     var btnContinuer = document.querySelector(".btn-continuer");
@@ -526,6 +546,7 @@ function afficher_9_bis() {
 
 function afficherEtape12(event) {
   delais_affichage();
+  updateProgressBar();
   var contentDiv = document.querySelector(".content");
 
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -576,6 +597,7 @@ function quizz()
   window.location.href='quizzMOA.html';
 }
 afficherEtape1();
+updateProgressBar();
 
 
 // Utilisez cette fonction pour mettre à jour la barre de progression à chaque changement de pourcentage
