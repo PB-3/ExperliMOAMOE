@@ -16,6 +16,45 @@ function testHTML(url, callback) {
       );
     });
 }
+
+
+function page_accueil() {
+  testHTML("page_accueil_choix_scenario.html", function() {
+    var btnContinuer = document.getElementById("choixForm");
+    btnContinuer.addEventListener("submit", choix_scenario);
+    var delaiss=document.querySelector('.delais_jour');
+    delaiss.style.display = 'none';
+    var progress = document.querySelector('.progress').style.display = 'none';
+    var bar = document.querySelector('.progress-bar').style.display='none';
+  });
+}
+
+function choix_scenario(event) {
+  event.preventDefault();
+  var form = event.target;
+  var selectedChoice = null;
+  
+  // Parcours des éléments du formulaire pour trouver le choix sélectionné
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    if (element.type === "radio" && element.checked) {
+      selectedChoice = element.value;
+      break;
+    }
+  }
+  
+  if (selectedChoice === 'MOA') {
+    afficherEtape1();
+    console.log("Choix : MOA");
+  } else if (selectedChoice === 'MOE') {
+    page_fin();
+    console.log("Choix : MOE");
+  } else if (selectedChoice === 'PRINCE2') {
+    afficher_page_9();
+    console.log("Choix : PRINCE2");
+  }
+}
+
 function delais_affichage() {
   let contentDiv = document.querySelector(".delais_jour");
   contentDiv.innerHTML = `<p>${delais_jour}</p>`;
@@ -71,6 +110,10 @@ var pourcentage =0 ;
 
 // Fonction pour afficher la première étape du jeu
 function afficherEtape1() {
+  var delaiss=document.querySelector('.delais_jour');
+  delaiss.style.display = '';
+  var progress = document.querySelector('.progress').style.display = '';
+  var bar = document.querySelector('.progress-bar').style.display='';
   updateProgressBar();
   delais_affichage();
   var contentDiv = document.querySelector(".content");
@@ -599,8 +642,10 @@ function afficherEtape12(event) {
   };
   for (var key in choixx) {
     if (selectedChoice == key) {
-      page_fin();
+      
       delais_jour += choixx[selectedChoice];
+      if(delais_jour>30) {page_perdu()}
+      else {page_fin()};
     }
   }
 }
@@ -610,24 +655,38 @@ function page_fin() {
   var contentDiv = document.querySelector(".content");
   testHTML("pagefin.html", function (event) {
     contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>
-    <button class="btn-continuer" id="quizzz", type="submit">Quizz</button>`;
+    <button class="btn-continuer" id="quizzz", type="submit">Quiz</button>
+    <button class="btn-continuer" id="restart">Recommencer</button>`;
+
     delais_affichage(); 
     updateProgressBar(); 
     btnContinuer=document.getElementById('quizzz');
     btnContinuer.addEventListener('click',quizz);
+    var restart = document.getElementById('restart');
+    restart.addEventListener('click',function(){window.location.href='x.html'});
 
   });
+}
+function page_perdu()
+{
+  var contentDiv = document.querySelector(".content");
+  testHTML("pageperdu.html", function (event) {
+    contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>
+    <button class="btn-continuer" id="quizzz", type="submit">Quiz</button>
+    <button class="btn-continuer" id="restart">Recommencer</button>`;
+    delais_affichage(); 
+    updateProgressBar(); 
+    btnContinuer=document.getElementById('quizzz');
+    btnContinuer.addEventListener('click',quizz);})
 }
 function quizz()
 {
   window.location.href='quizzMOA.html';
 }
-afficherEtape1();
+//afficherEtape1();
+page_accueil();
 updateProgressBar();
 
-
-// Utilisez cette fonction pour mettre à jour la barre de progression à chaque changement de pourcentage
-updateProgressBar();
 
 function updateProgressBar() {
 var pourcentage = (delais_jour/50) * 100

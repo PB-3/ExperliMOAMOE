@@ -319,6 +319,7 @@ div.dropdown {
       }
       
       .progress-bar {
+        
         width: 200px; /* Longueur de 100 pixels */
         height: 20px;
         background: linear-gradient(to right, #4caf50, #eb4343);
@@ -331,6 +332,7 @@ div.dropdown {
     }
     
     .progress {
+        
         width: 0%;
         height: 100%;
         background: #000000;
@@ -350,4 +352,47 @@ div.content
 #choixForm{
   font-size: 20px;
 
+}
+
+
+.choix_scenario {
+  list-style-type: none;
+  margin: 0;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+}
+
+.choix_scenario li {
+  display: flex;
+  font-size: 25px;
+  align-items: center;
+  margin-bottom: 5px;
+  border: 3px solid #164987;
+  border-radius: 5px;
+  background-color: #164987;
+  width: 50%;
+  color:whitesmoke;
+  margin-left: 20px;
+  transition: 1s;
+
+}
+
+.choix_scenario li input[type="checkbox"] {
+  margin-right: 10px;
+  
+}
+.choix_scenario li:hover{
+  background-color: #424b55;
+  transition: 1s;
+  transform: translateY(30%);
+  transform: scale(1.1);
+}
+.choix_scenario li label {
+  max-width: 90%;
+  overflow-wrap: break-word;
+}
+
+label[for="MOA"],
+label[for="MOE"],
+label[for="PRINCE2"] {
+  margin-left: 20px; /* Ajustez la valeur pour modifier l'espace */
 }
