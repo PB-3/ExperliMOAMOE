@@ -20,6 +20,7 @@ function testHTML(url, callback) {
   
 
 var choixProjet = [];
+var retours_desc = [];
 
 
 
@@ -51,47 +52,54 @@ function afficherEtape2()
     btnContinuer=document.querySelector(".btn-continuer");
     btnContinuer.addEventListener("click",afficherEtape3);
   })
-}
-function afficherEtape3()
-{ console.log("etape3");
+}function afficherEtape3() {
+  console.log("etape3");
   var contentDiv = document.querySelector(".content");
-  testHTML("page2.html",function()
-  {
-    var form = document.querySelector("#choixForm"); // Remplacez "formId" par l'ID de votre formulaire
+  testHTML("page2.html", function() {
+    var form = document.querySelector("#choixForm");
     form.addEventListener("submit", afficherEtape4);
-  })
+  });
 }
-function afficherEtape4(event)
-{   console.log("etape4");
-    event.preventDefault();
-    var form = event.target;
-    var selectedChoice = null;
 
-    // Parcours des éléments du formulaire pour trouver le choix sélectionné
-    for (var i = 0; i < form.elements.length; i++)
-     {
-      var element = form.elements[i];
-      var value = element.value
-      if (element.checked)
-       {
-        
-        console.log("selected choice : ",selectedChoice)
-        choixProjet.push(value);
-        console.log("element : ",value);
-       }
+function afficherEtape4(event) {
+  console.log("etape4");
+  event.preventDefault();
+  var form = event.target;
+  var selectedChoice = null;
+  var isOptionSelected = false; // Variable to track if any option is selected
+
+  // Parcours des éléments du formulaire pour trouver le choix sélectionné
+  for (var i = 0; i < form.elements.length; i++) {
+    var element = form.elements[i];
+    var value = element.value;
+    if (element.checked) {
+      console.log("selected choice: ", selectedChoice);
+      choixProjet.push(value);
+      console.log("element: ", value);
+      isOptionSelected = true; // Set the flag to true if an option is selected
     }
-    choices = [
-      "amelioration-vitesse",
-      "section-blog",
-      "integration-reseaux-sociaux",
-      "referencement",
-      "commerce-electronique",
-      "conception-graphique"
+  }
+
+  choices = [
+    "amelioration-vitesse",
+    "section-blog",
+    "integration-reseaux-sociaux",
+    "referencement",
+    "commerce-electronique",
+    "conception-graphique"
   ];
+
+  console.log(choixProjet);
   
-console.log(choixProjet);
-afficherEtape5();
-}   
+  // Check if no option is selected
+  if (!isOptionSelected) {
+    alert("Veuillez sélectionner au moins une options pour continuer.");
+    return; // Exit the function if no option is selected
+  }
+  
+  afficherEtape5();
+}
+
   
 
 
@@ -126,6 +134,11 @@ function afficherEtape5()
   {
     casPMBOK();
      
+  }
+  else
+  {
+    alert("veuillez sélectionner une option afin de continuer");
+    return;
   }
 
  });
@@ -164,6 +177,11 @@ function prince2_2(event)
       break;
     }
   }
+  if(selectedChoice===null)
+  {
+    alert("veuillez sélectionner une option.");
+    return;
+  }
   if(selectedChoice=== "recruter-interne")
   {
     choixProjet.push(selectedChoice);
@@ -193,7 +211,11 @@ function prince2_3(event) {
       break;
     }
   }
-
+  if(selectedChoice===null)
+  {
+    alert("veuillez sélectionner une option.");
+    return;
+  }
   if (selectedChoice === "approche-cascade" || selectedChoice === "approche-agile") {
     choixProjet.push(selectedChoice);
     console.log(choixProjet);
@@ -218,7 +240,11 @@ function prince2_3(event) {
       break;
     }
   }
-
+  if(selectedChoice===null)
+  {
+    alert("veuillez sélectionner une option.");
+    return;
+  }
   if (selectedChoice === "approche-cascade" || selectedChoice === "approche-agile") {
     choixProjet.push(selectedChoice);
     console.log(choixProjet);
@@ -227,8 +253,7 @@ function prince2_3(event) {
       btnContinuer.addEventListener("submit", prince2_4); // Correction : Suppression de l'argument "event"
     });
   }
-}
-function prince2_4(event) {
+}function prince2_4(event) {
   var form = event.target;
   var selectedChoice = null;
 
@@ -242,7 +267,13 @@ function prince2_4(event) {
   }
 
   event.preventDefault();
-
+  
+  // Check if no option is selected
+  if (selectedChoice === null) {
+    alert("Veuillez sélectionner une option.");
+    return;
+  }
+  
   if (selectedChoice === "decoupage-phase" || selectedChoice === "decoupage-produit") {
     choixProjet.push(selectedChoice);
     let random_alea = Math.floor(Math.random() * 2) + 1;
@@ -270,12 +301,25 @@ function prince2_4(event) {
           "techniquesOption"
         ];
 
+        var isOptionSelected = false; // Variable to track if any option is selected
+        
         for (var i = 0; i < form.elements.length; i++) {
           var element = form.elements[i];
-          if (element.type === "checkbox" && element.checked) {
-            selectedChoice = element.value;
-            choixProjet.push(selectedChoice);
+          selectedChoice = element.value;
+          if (selectedChoice === null) {
+            alert("Veuillez sélectionner une option.");
+            return;
           }
+          if (element.type === "checkbox" && element.checked) {
+            choixProjet.push(selectedChoice);
+            isOptionSelected = true; // Set the flag to true if any option is selected
+          }
+        }
+
+        // Check if no option is selected
+        if (!isOptionSelected) {
+          alert("Veuillez sélectionner au moins une option pour continuer.");
+          return;
         }
 
         console.log(choixProjet);
@@ -286,32 +330,134 @@ function prince2_4(event) {
 
   console.log(choixProjet);
 }
-
-function  prince2_5()
-{
-  testHTML("prince2/prince2_page5.html",function()
-  {
-    var btnContinuer=document.querySelector("#choixForm");
-    btnContinuer.addEventListener("submit",function(event){
+function prince2_5() {
+  testHTML("prince2/prince2_page5.html", function () {
+    var btnContinuer = document.querySelector("#choixForm");
+    btnContinuer.addEventListener("submit", function (event) {
       event.preventDefault();
       var inputValues = [
         "tableau-de-bord-visuel",
         "outil-gestion-projet-en-ligne",
         "reunions-etape-regulieres"
       ];
-      
+
       form = event.target;
-      selectedChoice=null;
+      selectedChoice = null;
+      var isOptionSelected = false; // Flag variable
+
       for (var i = 0; i < form.elements.length; i++) {
         var element = form.elements[i];
+        selectedChoice = element.value;
+
         if (element.type === "radio" && element.checked) {
-          selectedChoice = element.value;
+          isOptionSelected = true;
           choixProjet.push(selectedChoice);
         }
       }
-      console.log(choixProjet);
-    })
 
-    })
+      if (!isOptionSelected) { // Check if no option is selected
+        alert("Veuillez sélectionner une option.");
+        return;
+      }
+
+      console.log(choixProjet);
+      prince2_6();
+    });
+  });
 }
+
+function prince2_6() {
+  testHTML("prince2/prince2_page6.html", function () {
+    let btnContinuer = document.querySelector("#choixForm");
+    btnContinuer.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var textarea = document.getElementById("retour");
+
+      if (textarea.value === "") {
+        alert("Veuillez sélectionner une option.");
+        return;
+      }
+
+      retours_desc.push(textarea.value);
+      console.log(retours_desc);
+      prince2_7();
+    });
+  });
+}
+function prince2_7() {
+  testHTML("prince2/prince2_page7.html", function () {
+    let choixForm = document.getElementById("choixForm");
+    choixForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      form = event.target;
+      selectedChoice = null;
+      var isOptionSelected = false; // Flag variable
+
+      for (var i = 0; i < form.elements.length; i++) {
+        var element = form.elements[i];
+
+        if (element.type === "radio" && element.checked) {
+          isOptionSelected = true;
+          selectedChoice = element.value;
+          choixProjet.push(selectedChoice);
+          console.log(choixProjet);
+        }
+      }
+
+      if (!isOptionSelected) { // Check if no option is selected
+        alert("Veuillez sélectionner une option.");
+        return;
+      }
+
+      prince2_8();
+    });
+  });
+}
+
+function prince2_8() {
+  
+  testHTML("prince2/prince2_page8.html", function () {
+    let btn = document.querySelector(".btn-continuer");
+    btn.addEventListener("click", function () {
+      prince2_9(); // Call the next function when the button is clicked
+    });
+  });
+}
+
+
+function prince2_9() {
+  testHTML("prince2/prince2_page9.html", function () {
+    var form = document.querySelector("#choixForm");
+    var inputs = form.querySelectorAll("input[type='radio']");
+    var selectedChoice = null;
+    var isOptionSelected = false; // Flag variable
+
+    inputs.forEach(function (input) {
+      input.addEventListener("change", function () {
+        selectedChoice = input.value;
+        isOptionSelected = true;
+      });
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (selectedChoice !== null) {
+        choixProjet.push(selectedChoice);
+        prince2_10();
+      }
+    });
+
+    if (!isOptionSelected) { // Check if no option is selected
+      alert("Veuillez sélectionner une option.");
+    }
+  });
+}
+
+function prince2_10() {
+  testHTML("prince2/prince2_page10.html");
+}
+
+
+
 afficherEtape1();

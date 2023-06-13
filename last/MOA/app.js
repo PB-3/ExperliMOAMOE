@@ -50,7 +50,7 @@ function choix_scenario(event) {
     page_fin();
     console.log("Choix : MOE");
   } else if (selectedChoice === 'PRINCE2') {
-    afficher_page_9();
+    window.location.href = '../prince2_pmbok/game.html';
     console.log("Choix : PRINCE2");
   }
 }
@@ -96,7 +96,7 @@ var delaisMap = {
   "site-smartphones-tablettes": 4,
   "temps-chargement": 4,
   "section-actualites": 4,
-  personnalisation: 4,
+  "personnalisation": 4,
   "chargement-rapide-images": 4,
   "resolution-images": 4,
   "resolution-telechargement": 4,
@@ -313,15 +313,20 @@ function afficherEtape4(event) {
       isAnyCheckboxChecked = true;}});
 
     if(isAnyCheckboxChecked){
-     
+      console.log("delais avant",delais_jour);
     checkboxes.forEach(function (checkbox){
       if(checkbox.checked){
-      if (delais_jour >= 10) {
+      if (delais_jour >= 10)
+       {
         delais_jour -= delaisMap[checkbox.value];
-      } else if (delais_jour < 10) {
+      }
+       else if (delais_jour < 10)
+      {
+        console.log("checkbox",checkbox.value);
+        console.log("delaisMap",delaisMap[checkbox.value]);
         delais_jour += delaisMap[checkbox.value];
       }
-      console.log(delais_jour);
+      console.log("delais apres",delais_jour);
     }
     
   });
