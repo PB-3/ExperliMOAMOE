@@ -50,7 +50,7 @@ function choix_scenario(event) {
     page_fin();
     console.log("Choix : MOE");
   } else if (selectedChoice === 'PRINCE2') {
-    window.location.href = '../prince2_pmbok/game.html';
+    afficher_page_9();
     console.log("Choix : PRINCE2");
   }
 }
@@ -120,14 +120,24 @@ function afficherEtape1() {
   contentDiv.innerHTML = `
     <div class="game-title">
       <h1>ExperliMOAMOE</h1>
-      <p>Dans cette partie du jeu, vous incarnez le rôle de la Maîtrise d'Œuvre (MOE). Votre responsabilité est de mettre en œuvre le projet en tenant compte des besoins, du budget et des délais établis par la Maîtrise d'Ouvrage (MOA). Vous devrez créer une structure de pilotage pour assurer un suivi régulier avec la MOA, où vous effectuerez des évaluations périodiques pour mesurer l'avancement du projet. Votre objectif principal est de respecter les délais et le budget tout en garantissant que le site web soit performant au maximum de ses capacités.</p>
+      <p>Dans cette partie du jeu, vous incarnez le rôle de la Maîtrise d'Ouvrage (MOA). Votre responsabilité est de définir les besoins et les objectifs du projet, ainsi que d'établir le budget et les délais. Vous travaillerez en étroite collaboration avec la Maîtrise d'Œuvre (MOE) pour assurer la mise en place du projet. Votre rôle principal est de superviser le processus et de prendre des décisions stratégiques pour garantir la réussite du site web, en veillant à ce qu'il réponde aux attentes et aux exigences fixées.</p>
      
     </div>
     <button class="btn-continuer">Continuer</button>
   `;
   updateProgressBar();
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", afficherEtape2);
+  btnContinuer.addEventListener("click", afficherInfo0);
+}
+
+function afficherInfo0(){
+  delais_affichage();
+  updateProgressBar();
+  var contentDiv = document.querySelector(".content");
+  testHTML("etape1.html", function (event) {
+    var btnContinuer = document.querySelector(".btn-continuer");
+    btnContinuer.addEventListener("click", afficherEtape2);
+  });
 }
 
 // Fonction pour afficher l'étape 2 du jeu
@@ -140,11 +150,8 @@ function afficherEtape2() {
     choixForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
        // Récupération des valeurs du formulaire
-  var besoins = document.getElementById("besoins").value;
-  var budget = document.getElementById("budget").value;
-  var delais = document.getElementById("delais").value;
+ 
   var reunionSelect = document.getElementById("reunionSelect").value;
-  var objectif = document.getElementById("objectif").value;
 
   // delais jour
 
@@ -158,10 +165,23 @@ function afficherEtape2() {
     delais_jour += 8;
   }
       updateProgressBar();
-      afficherEtape3();
+      afficherInfo1();
     });
   });
 }
+
+
+function afficherInfo1(){
+  delais_affichage();
+  updateProgressBar();
+  var contentDiv = document.querySelector(".content");
+  testHTML("etape2.html", function (event) {
+    var btnContinuer = document.querySelector(".btn-continuer");
+    btnContinuer.addEventListener("click", afficherEtape3);
+  });
+}
+
+
 
 // Fonction pour afficher l'étape 3 du jeu
 function afficherEtape3() {
@@ -178,13 +198,13 @@ function afficherEtape3() {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
 
       const checkboxes = document.querySelectorAll('input[name="choix"]');
-      console.log('lenght', checkboxes.length)
+      console.log('length', checkboxes.length)
 
       var isAnyCheckboxChecked = false; // Variable pour suivre si au moins une case est cochée
 
       checkboxes.forEach(function (checkbox) {
         var value = checkbox.value;
-        if (value === "rien-faire") rien_faire += 1;
+        
         if (checkbox.checked) {
           isAnyCheckboxChecked = true; // Met à true si une case est cochée
           choixSelectionnes.push(value);
@@ -206,6 +226,7 @@ function afficherEtape3() {
           for (var key in delaisMap) {
             if (key === value) {
               delais_jour += delaisMap[key];
+              isAnyCheckboxChecked = true;
               break;
             }
           }
@@ -232,7 +253,7 @@ function afficherEtape3() {
         var contentDiv = document.querySelector(".content");
         contentDiv.innerHTML = "";
 
-        if (delais_jour >= 10) {
+        if (delais_jour >= 40) {
           delais_affichage();
           updateProgressBar();
           let htmll = `
@@ -258,7 +279,8 @@ function afficherEtape3() {
           var choixForm = document.getElementById("choixForm");
           choixForm.addEventListener("submit", afficherEtape4);
         } 
-        else if (delais_jour < 10) {
+        
+        else if (delais_jour < 22) {
 
           delais_affichage();
           updateProgressBar();
@@ -277,9 +299,9 @@ function afficherEtape3() {
                   <label for="${checkbox.value}">${checkbox.value}</label>
                 </li>
               </ul>`;
-            }
-          });
-
+          }
+        });
+         
           contentDiv.innerHTML += `
             <form id="choixForm">
               ${htmll}
@@ -289,6 +311,17 @@ function afficherEtape3() {
           var btnContinuer = document.getElementById("choixForm");
           btnContinuer.addEventListener("submit", afficherEtape4);
         }
+         
+        
+        
+        else if (delais_jour > 21 && delais_jour < 40) {
+          delais_affichage();
+          updateProgressBar();
+          console.log("delais > 21 et < 40");
+          
+          afficherInfo2();
+        }
+
       } else {
         // Aucune case n'est cochée, empêche la soumission du formulaire
         alert("Veuillez sélectionner au moins une option.");
@@ -296,6 +329,9 @@ function afficherEtape3() {
       }
     });
   });
+
+  var btnContinuer = document.getElementById("choixForm");
+  btnContinuer.addEventListener("submit", afficherInfo2);
 }
 
 
@@ -313,20 +349,15 @@ function afficherEtape4(event) {
       isAnyCheckboxChecked = true;}});
 
     if(isAnyCheckboxChecked){
-      console.log("delais avant",delais_jour);
+     
     checkboxes.forEach(function (checkbox){
       if(checkbox.checked){
-      if (delais_jour >= 10)
-       {
+      if (delais_jour >=40) {
         delais_jour -= delaisMap[checkbox.value];
-      }
-       else if (delais_jour < 10)
-      {
-        console.log("checkbox",checkbox.value);
-        console.log("delaisMap",delaisMap[checkbox.value]);
+      } else if (delais_jour < 27) {
         delais_jour += delaisMap[checkbox.value];
       }
-      console.log("delais apres",delais_jour);
+      console.log(delais_jour);
     }
     
   });
@@ -335,9 +366,19 @@ else{
   alert("Veuillez sélectionner au moins une option.");
   return false;
 }
-  
+
   updateProgressBar();
-  afficherEtape5();
+  afficherInfo2();
+}
+
+function afficherInfo2 (){
+delais_affichage();
+updateProgressBar();
+var contentDiv = document.querySelector(".content");
+testHTML("etape3.html", function (event) {
+  var btnContinuer = document.querySelector(".btn-continuer");
+  btnContinuer.addEventListener("click", afficherEtape5);
+});
 }
 
 // Fonction pour afficher l'étape 5 du jeu
@@ -694,30 +735,30 @@ updateProgressBar();
 
 
 function updateProgressBar() {
-var pourcentage = (delais_jour/50) * 100
+  var pourcentage = (delais_jour / 50) * 100;
 
-if (delais_jour>= 48 ) {
-  if (delais_jour<=50 ) {
+  if (delais_jour >= 48) {
+    if (delais_jour <= 50) {
+      var pourcentageOppose = Math.abs(pourcentage - 100);
+      var progressBar = document.querySelector(".progress");
+      progressBar.style.width = pourcentageOppose + "%";
+      progressBar.style.background = ""; // Réinitialiser la couleur de fond
+      progressBar.innerHTML = ""; // Réinitialiser le message
+    } else {
+      var progressBar = document.querySelector(".progress");
+      progressBar.style.width = "100%"; // Remplir la barre à 100%
+      progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
+      progressBar.innerHTML = "Délai dépassé /!\\";
+    }
+  } else {
     var pourcentageOppose = Math.abs(pourcentage - 100);
+    pourcentageOppose = pourcentageOppose + pourcentageOppose * 0.05;
+
     var progressBar = document.querySelector(".progress");
     progressBar.style.width = pourcentageOppose + "%";
+
+    // Réinitialiser le message et la couleur de fond
+    progressBar.style.background = ""; // Réinitialiser la couleur de fond
+    progressBar.innerHTML = ""; // Réinitialiser le message
   }
-  
-    
-  else {
-    var progressBar = document.querySelector(".progress");
-  progressBar.style.width = "100%"; // Remplir la barre à 100%
-  progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
-  progressBar.innerHTML = "Délai dépassé /!\\";
-
-  }  
-}
-
-else{
-var pourcentageOppose = Math.abs(pourcentage - 100);
-var pourcentageOppose = pourcentageOppose + (pourcentageOppose * 0.05);
-
-var progressBar = document.querySelector(".progress");
-progressBar.style.width = pourcentageOppose + "%";
-}
 }
