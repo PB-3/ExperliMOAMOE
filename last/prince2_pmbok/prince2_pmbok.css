@@ -17,7 +17,6 @@ div.header h1.title {
     font-size: 50px;
     font-weight: 500;
     background: linear-gradient(to bottom right, #ffffff, #6c707a);
-
     border: 3px solid #164987;
     border-radius: 5px;
     display: inline-block;
@@ -27,17 +26,18 @@ div.header h1.title {
 
 div.content {
     margin-top: 20px;
+    padding:20px;
     width: 1000px; /* Largeur du rectangle */
-    height: 800px; /* Hauteur du rectangle */
+    height: 900px; /* Hauteur du rectangle */
     margin-bottom: 20px;
     display: inline-block;
     position: relative;
-    border: 3px solid #164987;
-    border-radius: 5px;
-    background: #ffffff;
+    border: 5px solid #164987;
+    border-radius: 50px;
+    background: whitesmoke;
     font-family:Lato, Arial, Helvetica, sans-serif;
-    font :400 ;
-    font-size: 20px;
+    color: #164987;
+    font-size: 25px;
 
   }
 
@@ -93,6 +93,8 @@ div.content div.game-title {
 .no-bullets {
   list-style-type: none;
   margin: 0;
+  text-align: justify;
+ 
 }
 
 .no-bullets li {
@@ -191,18 +193,7 @@ nav.navigation {
         position: relative; /* Position relative pour les pseudo-éléments */
     }
     
-div.content
-{
-  font-family:Lato, Arial, Helvetica, sans-serif;
-  color:black;
-  font-size: 25px;
-  
-}    
-      
-#choixForm{
-  font-size: 20px;
 
-}
 
 
 .choix_scenario {

@@ -341,18 +341,8 @@ div.dropdown {
         position: relative; /* Position relative pour les pseudo-éléments */
     }
     
-div.content
-{
-  font-family:Lato, Arial, Helvetica, sans-serif;
-  color:black;
-  font-size: 25px;
-  
-}    
-      
-#choixForm{
-  font-size: 20px;
 
-}
+      
 
 
 .choix_scenario {

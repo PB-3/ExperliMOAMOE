@@ -17,52 +17,67 @@ function testHTML(url, callback) {
       });
   }
 
-  
+
 
 var choixProjet = [];
 var retours_desc = [];
 var cout = 0 ; 
 
+
 var choices = {
-  "amelioration-vitesse": 100,
-  "section-blog": 50,
-  "integration-reseaux-sociaux": 80,
-  "referencement": 120,
-  "commerce-electronique": 200,
-  "conception-graphique": 150,
-  "recruter-interne":10000,
-  "externaliser-equipe":5000,
-  "approche-cascade":10,
-  "approche-agile":10,
-  "decoupage-phase":10,
-  "decoupage-produit":10,
-  "recrutement-interne":10,
-  "agence-recrutement":10,
-  "externalisation-taches":10,
-  "sous-traitance":10,
-  "redistribuer-membres":10,
-  "formations-internes":10,
-  "analyserOption":10,
-  "extensionOption":10,
-  "reunionOption":10,
-  "groupeTravailOption":10,
-  "classementOption":10,
-  "consultationOption":10,
-  "evaluationOption":10,
-  "techniquesOption":10,
-  "tableau-de-bord-visuel":10,
-  "outil-gestion-projet-en-ligne":10,
-  "reunions-etape-regulieres":10,
-  "tests-acceptation":10,
-  "tests-fonctionnels":10,
-  "tests-unitaires":10,
-  "service-cloud":10,
-  "serveur-dedie":10,
-  "serveur-partage":10
+  "amelioration-vitesse": 1000,
+  "section-blog": 500,
+  "integration-reseaux-sociaux": 800,
+  "referencement": 1200,
+  "commerce-electronique": 2000,
+  "conception-graphique": 1500,
+  "recruter-interne": 10000,
+  "externaliser-equipe": 5000,
+  "approche-cascade": 1000,
+  "approche-agile": 1200,
+  "decoupage-phase": 800,
+  "decoupage-produit": 1000,
+  "recrutement-interne": 2000,
+  "agence-recrutement": 3000,
+  "externalisation-taches": 1500,
+  "sous-traitance": 1800,
+  "redistribuer-membres": 1000,
+  "formations-internes": 500,
+  "analyserOption": 200,
+  "extensionOption": 300,
+  "reunionOption": 100,
+  "groupeTravailOption": 200,
+  "classementOption": 150,
+  "consultationOption": 250,
+  "evaluationOption": 300,
+  "techniquesOption": 200,
+  "tableauBord": 500,
+  "outilGestion": 400,
+  "reunionsEtape": 200,
+  "tests-acceptation": 800,
+  "tests-fonctionnels": 700,
+  "tests-unitaires": 600,
+  "service-cloud": 1000,
+  "serveur-dedie": 1500,
+  "serveur-partage": 1200
 };
+
+function checkWinOrLose() {
+  var winRange = { min: 10000, max: 12000 };
+
+  if (cout >= winRange.min && cout <= winRange.max) {
+    console.log("Congratulations! You win!");
+    return true;
+  } else if (cout < winRange.min && cout > winRange.max) {
+    console.log("Sorry, you lose!");
+    return false;
+  } 
+}
+
 
 
   function afficherEtape1() {
+
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
     <div class="game-title">
@@ -81,14 +96,12 @@ var choices = {
 
 function afficherEtape2()
 {
-  var contentDiv = document.querySelector(".content");
   testHTML("page1.html",function(){
     btnContinuer=document.querySelector(".btn-continuer");
     btnContinuer.addEventListener("click",afficherEtape3);
   })
 }function afficherEtape3() {
   console.log("etape3");
-  var contentDiv = document.querySelector(".content");
   testHTML("page2.html", function() {
     var form = document.querySelector("#choixForm");
     form.addEventListener("submit", afficherEtape4);
@@ -132,43 +145,12 @@ function afficherEtape5()
 {
   testHTML("page3.html",function()
   {
-    var choix = document.getElementById("choixForm");
-    choix.addEventListener("submit", function (event)
- {
-      
-  event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
-  var form = event.target;
-  var selectedChoice = null;
-
-  // Parcours des éléments du formulaire pour trouver le choix sélectionné
-  for (var i = 0; i < form.elements.length; i++) 
-  {
-    var element = form.elements[i];
-    if (element.type === "radio" && element.checked)
-    {
-      selectedChoice = element.value;
-      break;
-    }
-  }
-  if(selectedChoice=="PRINCE2")
-    {
-      casPRINCE2();
-    
-    }
-  else if (selectedChoice=="PMBOK")
-  {
-    casPMBOK();
-     
-  }
-  else
-  {
-    alert("veuillez sélectionner une option afin de continuer");
-    return;
-  }
-
- });
-  })
+    var btn = document.querySelector(".btn-continuer");
+    btn.addEventListener("click", casPRINCE2);
+  });
 }
+
+
 
 function casPRINCE2()
 {
@@ -328,7 +310,6 @@ function prince2_5() {
     var form = document.querySelector("#choixForm");
     var inputs = form.querySelectorAll("input[type='radio']");
     var selectedChoice = null;
-    var isOptionSelected = false; // Flag variable
 
     inputs.forEach(function (input) {
       input.addEventListener("change", function () {
@@ -421,8 +402,6 @@ function prince2_9() {
   testHTML("prince2/prince2_page9.html", function () {
     console.log("func9");
     var form = document.querySelector("#choixForm");
-    var inputs = form.querySelectorAll("input[type='radio']");
-    var isOptionSelected = false; // Flag variable
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -436,7 +415,9 @@ function prince2_9() {
           choixProjet.push(selectedChoice);
           cout += choices[selectedChoice];
           console.log(cout);
-          prince2_10();
+          if(checkWinOrLose()) prince2_10_win();
+          else
+            prince2_10_loose();
           return; // Exit the loop if an option is selected
         }
       }
@@ -449,10 +430,12 @@ function prince2_9() {
 
 
 
-function prince2_10() {
-  testHTML("prince2/prince2_page10.html");
+function prince2_10_win() {
+  testHTML("prince2/prince2_page10_win.html");
 }
-
+function prince2_10_loose() {
+  testHTML("prince2/prince2_page10_loose.html");
+}
 
 
 afficherEtape1();
