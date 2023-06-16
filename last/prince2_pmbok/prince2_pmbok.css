@@ -163,13 +163,35 @@ nav.navigation {
         font-size: 20px;
         font-family: Lato, Arial, Helvetica, sans-serif;
         position: absolute;
+        display: inline-flex;
         bottom: 10%;
         left: 45%;
      
         transition: 1s;
         
       }
-      
+      .btn-restart:hover {
+        background: #4286f4;
+        transition: 1s;
+        transform: translateY(20%);
+      }
+    .btn-restart
+    {
+      background: #164987;
+      color:  #ffffff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+      font-family: Lato, Arial, Helvetica, sans-serif;
+      position: absolute;
+      display: inline-flex;
+      bottom: 10%;
+      left: 60%;
+      transition: 1s;
+    }
       .progress-bar {
         
         width: 200px; /* Longueur de 100 pixels */
@@ -242,4 +264,10 @@ textarea#retour
 {
   resize: none;
   border: 5px solid black;
+  position: relative;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  color: #164987;
+  height: 300px;
+  width: 95%;
 }

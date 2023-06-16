@@ -59,7 +59,10 @@ var choices = {
   "tests-unitaires": 600,
   "service-cloud": 1000,
   "serveur-dedie": 1500,
-  "serveur-partage": 1200
+  "serveur-partage": 1200,
+  "approbation":10,
+  "refus":0,
+  "test":400
 };
 
 function checkWinOrLose() {
@@ -103,8 +106,8 @@ function afficherEtape2()
 }function afficherEtape3() {
   console.log("etape3");
   testHTML("page2.html", function() {
-    var form = document.querySelector("#choixForm");
-    form.addEventListener("submit", afficherEtape4);
+    var form = document.querySelector(".btn-continuer");
+    form.addEventListener("click", afficherEtape5);
   });
 }
 function afficherEtape4(event) {
@@ -134,7 +137,7 @@ function afficherEtape4(event) {
     return; // Exit the function if no option is selected
   }
 
-  afficherEtape5();
+  prince2_1();
 }
 
 
@@ -156,8 +159,8 @@ function casPRINCE2()
 {
   testHTML("page4.html",function()
   {
-    var btnContinuer=document.querySelector(".btn-continuer");
-    btnContinuer.addEventListener("click",prince2_1);
+    var btnContinuer=document.querySelector("#choixForm");
+    btnContinuer.addEventListener("submit",afficherEtape4);
   })
 }
 
@@ -231,10 +234,16 @@ function prince2_3(event) {
   if (selectedChoice === "approche-cascade" || selectedChoice === "approche-agile") {
     choixProjet.push(selectedChoice);
     console.log(choixProjet);
-    testHTML("prince2/prince2_page3.html", function () {
-      var btnContinuer = document.querySelector("#choixForm");
-      btnContinuer.addEventListener("submit", prince2_4); // Correction : Suppression de l'argument "event"
-    });
+   testHTML("fiche_info_approches.html",function(){
+    btn=document.querySelector(".btn-continuer");
+
+    btn.addEventListener("click", function(){
+      testHTML("prince2/prince2_page3.html",function(){
+        btn=document.querySelector("#choixForm");
+        btn.addEventListener("submit",prince2_4);
+      });
+    })  
+   })
   }
 }
 
@@ -261,7 +270,12 @@ function prince2_4(event) {
     return;
   }
   
-  
+  testHTML("fiche_info_decoupages.html",function(){
+    btn=document.querySelector(".btn-continuer");
+    btn.addEventListener("click",function(){
+
+
+        
     let random_alea = Math.floor(Math.random() * 2) + 1;
     console.log(random_alea, "random");
     let link = "prince2/prince2_page4_alea" + random_alea + ".html";
@@ -300,6 +314,10 @@ function prince2_4(event) {
     });
   
 
+
+
+    })
+  })
   console.log(choixProjet);
 
 
@@ -391,9 +409,46 @@ function prince2_7() {
 function prince2_8() {
 
   testHTML("prince2/prince2_page8.html", function () {
-    let btn = document.querySelector(".btn-continuer");
+    let btn = document.querySelector("#choixForm");
     console.log("func8");
-    btn.addEventListener("click", prince2_9);
+    btn.addEventListener("submit", function(event){
+      
+      event.preventDefault();
+      form = event.target;
+      selectedChoice = null;
+      var isOptionSelected = false; // Flag variable
+
+      for (var i = 0; i < form.elements.length; i++) {
+        var element = form.elements[i];
+
+        if (element.type === "radio" && element.checked) {
+          isOptionSelected = true;
+          selectedChoice = element.value;
+          cout+=choices[selectedChoice];
+          console.log(cout);
+          choixProjet.push(selectedChoice);
+          console.log(choixProjet);
+          
+        }
+      if(selectedChoice=="refus")
+      {
+        prince2_9();
+        return;
+      }
+      if(selectedChoice=="test")
+      {
+        testHTML("prince2/prince2_page8_test.html",function(){
+          btn=document.querySelector(".btn-continuer");
+          btn.addEventListener("click",prince2_9);
+        });
+      }
+      }
+      if (!isOptionSelected) { // Check if no option is selected
+        alert("Veuillez sélectionner une option.");
+        return;
+      }
+      prince2_9();
+    });
   });
 }
 
