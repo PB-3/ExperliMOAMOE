@@ -26,7 +26,6 @@ div.header h1.title {
 
 div.content {
     margin-top: 20px;
-    padding:20px;
     width: 1000px; /* Largeur du rectangle */
     height: 900px; /* Hauteur du rectangle */
     margin-bottom: 20px;
@@ -37,7 +36,8 @@ div.content {
     background: whitesmoke;
     font-family:Lato, Arial, Helvetica, sans-serif;
     color: #164987;
-    font-size: 25px;
+    
+   
 
   }
 
@@ -62,9 +62,10 @@ div.content p#titlegame {
 }
 div.content div.game-title {
     position: absolute ;
-    font-size: 38px;
+    font-size: 35px;
+    padding: 10%;
+    text-align:justify;
     font-family:Lato, Arial, Helvetica, sans-serif; 
-    font:400;
     color:#164987;
 }
 .user-data {
@@ -94,6 +95,9 @@ div.content div.game-title {
   list-style-type: none;
   margin: 0;
   text-align: justify;
+  padding-left:5%;
+  padding-right:5%;
+  font-size: 25px;
  
 }
 
@@ -165,7 +169,7 @@ nav.navigation {
         position: absolute;
         display: inline-flex;
         bottom: 10%;
-        left: 45%;
+        left: 40%;
      
         transition: 1s;
         
@@ -187,9 +191,9 @@ nav.navigation {
       font-size: 20px;
       font-family: Lato, Arial, Helvetica, sans-serif;
       position: absolute;
-      display: inline-flex;
+      display: inline-block;
       bottom: 10%;
-      left: 60%;
+      left: 50%;
       transition: 1s;
     }
       .progress-bar {
@@ -268,6 +272,6 @@ textarea#retour
   font-family: Lato, Arial, Helvetica, sans-serif;
   font-size: 25px;
   color: #164987;
-  height: 300px;
+  height: 250px;
   width: 95%;
 }

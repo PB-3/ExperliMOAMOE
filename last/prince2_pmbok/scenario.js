@@ -65,6 +65,42 @@ var choices = {
   "test":400
 };
 
+
+
+
+
+function updateProgressBar() {
+  var pourcentage = (cout / 50) * 100;
+
+  if (cout >= 48) {
+    if (cout <= 15000) {
+      var pourcentageOppose = Math.abs(pourcentage - 100);
+      var progressBar = document.querySelector(".progress");
+      progressBar.style.width = pourcentageOppose + "%";
+      progressBar.style.background = ""; // Réinitialiser la couleur de fond
+      progressBar.innerHTML = ""; // Réinitialiser le message
+    } else {
+      var progressBar = document.querySelector(".progress");
+      progressBar.style.width = "100%"; // Remplir la barre à 100%
+      progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
+      progressBar.innerHTML = "Délai dépassé /!\\";
+    }
+  } else {
+    var pourcentageOppose = Math.abs(pourcentage - 100);
+    pourcentageOppose = pourcentageOppose + pourcentageOppose * 0.05;
+
+    var progressBar = document.querySelector(".progress");
+    progressBar.style.width = pourcentageOppose + "%";
+
+    // Réinitialiser le message et la couleur de fond
+    progressBar.style.background = ""; // Réinitialiser la couleur de fond
+    progressBar.innerHTML = ""; // Réinitialiser le message
+  }
+}
+
+
+
+
 function checkWinOrLose() {
   var winRange = { min: 10000, max: 12000 };
 
@@ -80,11 +116,12 @@ function checkWinOrLose() {
 
 
   function afficherEtape1() {
-
+updateProgressBar();
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
+    <h1>PRINCE2-PMBOK</h1>
     <div class="game-title">
-      <h1>PRINCE2-PMBOK</h1>
+      
       <p>En tant que Maître d'Ouvrage (MOA), votre rôle est essentiel pour le succès du projet. Vous devez lancer le projet en définissant vos besoins, votre budget et vos délais, en utilisant les principes du PMBOK et du PRINCE2.</p>
       <p> Une structure de pilotage solide doit être mise en place pour superviser le projet, incluant des réunions régulières de suivi. Votre objectif ultime est de respecter les délais, le budget et d'atteindre un niveau élevé de qualité pour le développement du site web.</p>
      
@@ -99,6 +136,7 @@ function checkWinOrLose() {
 
 function afficherEtape2()
 {
+  updateProgressBar();
   testHTML("page1.html",function(){
     btnContinuer=document.querySelector(".btn-continuer");
     btnContinuer.addEventListener("click",afficherEtape3);
@@ -111,6 +149,7 @@ function afficherEtape2()
   });
 }
 function afficherEtape4(event) {
+  updateProgressBar();
   console.log("etape4");
   event.preventDefault();
   var form = event.target;
@@ -145,7 +184,7 @@ function afficherEtape4(event) {
 
 
 function afficherEtape5()
-{
+{updateProgressBar();
   testHTML("page3.html",function()
   {
     var btn = document.querySelector(".btn-continuer");
@@ -156,7 +195,7 @@ function afficherEtape5()
 
 
 function casPRINCE2()
-{
+{updateProgressBar();
   testHTML("page4.html",function()
   {
     var btnContinuer=document.querySelector("#choixForm");
@@ -165,14 +204,14 @@ function casPRINCE2()
 }
 
 function prince2_1()
-{
+{updateProgressBar();
   testHTML("prince2/prince2_page1.html",function(){
    var btnContinuer=document.querySelector("#choixForm");
    btnContinuer.addEventListener("submit",prince2_2);
   })
 }
 function prince2_2(event)
-{
+{updateProgressBar();
   event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
   var form = event.target;
   var selectedChoice = null;
