@@ -2,15 +2,11 @@ let contentDiv = document.getElementById('quizz');
 contentDiv.addEventListener('submit', reponsesQuizz);
 
 let answers = ['b', 'b', 'd', 'a', 'd', 'd', 'd', 'd', 'a', 'd'];
+let joueur_reponse=[];
 
 function reponsesQuizz(event) {
   event.preventDefault();
   var contentDiv = document.querySelector('.result');
-  let res=document.getElementById('restart');
-  res.addEventListener('click',function (){
-    window.location.href = "quizzMOA.html";
-    return;
-  })
   contentDiv.innerHTML=``;
   let isAnyCheckboxChecked = false;
   let htmlll = '';
@@ -25,7 +21,7 @@ function reponsesQuizz(event) {
       const correctAnswer = answers[i];
 
       if (userAnswer === correctAnswer) {
-        htmlll += `<p>Question ${i + 1}: Correct answer</p>`;
+        
       } else {
         htmlll += `<p>Question ${i + 1}: Incorrect answer. Correct answer is ${correctAnswer}</p>`;
       }
@@ -37,5 +33,17 @@ function reponsesQuizz(event) {
     return false;
   }
 
-  contentDiv.innerHTML += htmlll;
+  
+  quiz_reponse();
+}
+
+function quiz_reponse() {
+  
+
+  var r1 = document.getElementById('r1');
+  r1.innerHTML = '<h2>Question 1</h2><p>This is the first question.</p>';
+
+  window.location.href = "quiz_reponse.html";
+  
+
 }

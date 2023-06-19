@@ -18,42 +18,7 @@ function testHTML(url, callback) {
 }
 
 
-function page_accueil() {
-  testHTML("page_accueil_choix_scenario.html", function() {
-    var btnContinuer = document.getElementById("choixForm");
-    btnContinuer.addEventListener("submit", choix_scenario);
-    var delaiss=document.querySelector('.delais_jour');
-    delaiss.style.display = 'none';
-    var progress = document.querySelector('.progress').style.display = 'none';
-    var bar = document.querySelector('.progress-bar').style.display='none';
-  });
-}
 
-function choix_scenario(event) {
-  event.preventDefault();
-  var form = event.target;
-  var selectedChoice = null;
-  
-  // Parcours des éléments du formulaire pour trouver le choix sélectionné
-  for (var i = 0; i < form.elements.length; i++) {
-    var element = form.elements[i];
-    if (element.type === "radio" && element.checked) {
-      selectedChoice = element.value;
-      break;
-    }
-  }
-  
-  if (selectedChoice === 'MOA') {
-    afficherEtape1();
-    console.log("Choix : MOA");
-  } else if (selectedChoice === 'MOE') {
-    page_fin();
-    console.log("Choix : MOE");
-  } else if (selectedChoice === 'PRINCE2') {
-    afficher_page_9();
-    console.log("Choix : PRINCE2");
-  }
-}
 
 function delais_affichage() {
   let contentDiv = document.querySelector(".delais_jour");
@@ -91,19 +56,20 @@ var choixSelectionnesListe = ``;
 var NouvellesFonctionnalites = [];
 var NouvellesFonctionnalites = [];
 var delaisMap = {
-  "bouton-partage": 2,
+  "Bouton de partage pour partager facilement sur les réseaux sociaux. 2 jours": 2,
   "resolution-caracteres-speciaux": 2,
-  "site-smartphones-tablettes": 4,
-  "temps-chargement": 4,
-  "section-actualites": 4,
-  personnalisation: 4,
-  "chargement-rapide-images": 4,
-  "resolution-images": 4,
-  "resolution-telechargement": 4,
-  "recherche-avancee": 5,
-  "traduction-anglais": 6,
-  "site-tous-navigateurs": 4,
-  "reduction-donnees": 5,
+  "Site disponible sur smartphones et tablettes. 7 jours": 4,
+  "Temps de chargement de la page d’accueil plus court. 3 jours": 4,
+  "Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités. 4 jours": 4,
+  "Option permettant de personnaliser la couleur, la mise en page, le thème... 4 jours": 4,
+  "Chargement plus rapide des images. 4 jours": 4,
+  "Résolution du problème qui empêchait l’affichage correct des images sur certaines pages. 4 jours": 4,
+  "Résolution du problème qui empêchait des utilisateurs de télécharger des fichiers du site. 4 jours": 4,
+  "Résolution du problème d’affichage des caractères spéciaux. 2 jours": 5,
+  "Système de recherche avancée pour trouver rapidement des informations cherchées. 5 jours": 5,
+  "Traduction du site en anglais. 6 jours": 6,
+  "Votre site sera disponible sur tous les navigateurs. 4 jours": 4,
+  "Réduction de la consommation de données. 5 jours": 5,
 };
 var pourcentage =0 ;
 
@@ -119,15 +85,26 @@ function afficherEtape1() {
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
     <div class="game-title">
-      <h1>ExperliMOAMOE</h1>
-      <p>Dans cette partie du jeu, vous incarnez le rôle de la Maîtrise d'Œuvre (MOE). Votre responsabilité est de mettre en œuvre le projet en tenant compte des besoins, du budget et des délais établis par la Maîtrise d'Ouvrage (MOA). Vous devrez créer une structure de pilotage pour assurer un suivi régulier avec la MOA, où vous effectuerez des évaluations périodiques pour mesurer l'avancement du projet. Votre objectif principal est de respecter les délais et le budget tout en garantissant que le site web soit performant au maximum de ses capacités.</p>
-     
+      <h1>Scenario MOA</h1>
+      <p>Dans cette partie du jeu, vous incarnez le rôle de la Maîtrise d'Ouvrage (MOA). Votre responsabilité est de définir les besoins et les objectifs du projet, ainsi que d'établir le budget et les délais. Vous travaillerez en étroite collaboration avec la Maîtrise d'Œuvre (MOE) pour assurer la mise en place du projet. Votre rôle principal est de superviser le processus et de prendre des décisions stratégiques pour garantir la réussite du site web, en veillant à ce qu'il réponde aux attentes et aux exigences fixées.</p>
+      <button class="btn-continuer">Continuer</button>
     </div>
-    <button class="btn-continuer">Continuer</button>
+
+    
   `;
   updateProgressBar();
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", afficherEtape2);
+  btnContinuer.addEventListener("click", afficherInfo0);
+}
+
+function afficherInfo0(){
+  delais_affichage();
+  updateProgressBar();
+  var contentDiv = document.querySelector(".content");
+  testHTML("etape1.html", function (event) {
+    var btnContinuer = document.querySelector(".btn-continuer");
+    btnContinuer.addEventListener("click", afficherEtape2);
+  });
 }
 
 // Fonction pour afficher l'étape 2 du jeu
@@ -140,11 +117,8 @@ function afficherEtape2() {
     choixForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
        // Récupération des valeurs du formulaire
-  var besoins = document.getElementById("besoins").value;
-  var budget = document.getElementById("budget").value;
-  var delais = document.getElementById("delais").value;
+ 
   var reunionSelect = document.getElementById("reunionSelect").value;
-  var objectif = document.getElementById("objectif").value;
 
   // delais jour
 
@@ -158,10 +132,23 @@ function afficherEtape2() {
     delais_jour += 8;
   }
       updateProgressBar();
-      afficherEtape3();
+      afficherInfo1();
     });
   });
 }
+
+
+function afficherInfo1(){
+  delais_affichage();
+  updateProgressBar();
+  var contentDiv = document.querySelector(".content");
+  testHTML("etape2.html", function (event) {
+    var btnContinuer = document.querySelector(".btn-continuer");
+    btnContinuer.addEventListener("click", afficherEtape3);
+  });
+}
+
+
 
 // Fonction pour afficher l'étape 3 du jeu
 function afficherEtape3() {
@@ -178,34 +165,50 @@ function afficherEtape3() {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
 
       const checkboxes = document.querySelectorAll('input[name="choix"]');
-      console.log('lenght', checkboxes.length)
+      console.log('length', checkboxes.length)
 
       var isAnyCheckboxChecked = false; // Variable pour suivre si au moins une case est cochée
 
       checkboxes.forEach(function (checkbox) {
         var value = checkbox.value;
-        if (value === "rien-faire") rien_faire += 1;
+        
         if (checkbox.checked) {
           isAnyCheckboxChecked = true; // Met à true si une case est cochée
           choixSelectionnes.push(value);
 
-          if (value == "site-smartphones-tablettes") {
+          if (value == "Site disponible sur smartphones et tablettes. 7 jours") {
             NouvellesFonctionnalites.push(value);
-          } else if (value == "bouton-partage") {
+          } else if (value == "Bouton de partage pour partager facilement sur les réseaux sociaux. 2 jours") {
             NouvellesFonctionnalites.push(value);
-          } else if (value == "recherche-avancee") {
+          } else if (value == "Système de recherche avancée pour trouver rapidement des informations cherchées. 5 jours") {
             NouvellesFonctionnalites.push(value);
-          } else if (value == "section-actualites") {
+          } else if (value == "Une section « Actualités » pour voir les dernières mises à jour et fonctionnalités. 4 jours") {
             NouvellesFonctionnalites.push(value);
-          } else if (value == "personnalisation") {
+          } else if (value == "Option permettant de personnaliser la couleur, la mise en page, le thème... 4 jours") {
             NouvellesFonctionnalites.push(value);
-          } else if (value == "traduction-anglais") {
+          } else if (value == "Temps de chargement de la page d’accueil plus court. 3 jours") {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == "Votre site sera disponible sur tous les navigateurs. 4 jours") {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == "Chargement plus rapide des images. 4 jours") {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == "Traduction du site en anglais. 6 jours") {
+            NouvellesFonctionnalites.push(value);
+          
+          } else if (value == "Réduction de la consommation de données. 5 jours") {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == "Résolution du problème d’affichage des caractères spéciaux. 2 jours") {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == "Résolution du problème qui empêchait l’affichage correct des images sur certaines pages. 4 jours") {
+            NouvellesFonctionnalites.push(value);
+          } else if (value == "Résolution du problème qui empêchait des utilisateurs de télécharger des fichiers du site. 4 jours") {
             NouvellesFonctionnalites.push(value);
           }
-
+        
           for (var key in delaisMap) {
             if (key === value) {
               delais_jour += delaisMap[key];
+              isAnyCheckboxChecked = true;
               break;
             }
           }
@@ -232,7 +235,7 @@ function afficherEtape3() {
         var contentDiv = document.querySelector(".content");
         contentDiv.innerHTML = "";
 
-        if (delais_jour >= 10) {
+        if (delais_jour >= 40) {
           delais_affichage();
           updateProgressBar();
           let htmll = `
@@ -252,17 +255,18 @@ function afficherEtape3() {
           contentDiv.innerHTML += `
             <form id="choixForm">
               ${htmll}
-              <button class="btn-continuer">Next</button>
+              <button class="btn-continuer">Continuer</button>
             </form>`;
 
           var choixForm = document.getElementById("choixForm");
           choixForm.addEventListener("submit", afficherEtape4);
         } 
-        else if (delais_jour < 10) {
+        
+        else if (delais_jour < 22) {
 
           delais_affichage();
           updateProgressBar();
-          console.log("delais<10");
+          console.log("delais<22");
           var contentDiv = document.querySelector(".content");
 
           let htmll = `<p>Choix non sélectionnés :</p>
@@ -277,18 +281,29 @@ function afficherEtape3() {
                   <label for="${checkbox.value}">${checkbox.value}</label>
                 </li>
               </ul>`;
-            }
-          });
-
+          }
+        });
+         
           contentDiv.innerHTML += `
             <form id="choixForm">
               ${htmll}
-              <button class="btn-continuer" type="submit">Next</button>
+              <button class="btn-continuer" type="submit">Continuer</button>
             </form>`;
 
           var btnContinuer = document.getElementById("choixForm");
           btnContinuer.addEventListener("submit", afficherEtape4);
         }
+         
+        
+        
+        else if (delais_jour > 21 && delais_jour < 40) {
+          delais_affichage();
+          updateProgressBar();
+          console.log("delais > 21 et < 40");
+          
+          afficherInfo2();
+        }
+
       } else {
         // Aucune case n'est cochée, empêche la soumission du formulaire
         alert("Veuillez sélectionner au moins une option.");
@@ -296,6 +311,9 @@ function afficherEtape3() {
       }
     });
   });
+
+  var btnContinuer = document.getElementById("choixForm");
+  btnContinuer.addEventListener("submit", afficherInfo2);
 }
 
 
@@ -316,9 +334,9 @@ function afficherEtape4(event) {
      
     checkboxes.forEach(function (checkbox){
       if(checkbox.checked){
-      if (delais_jour >= 10) {
+      if (delais_jour >=40) {
         delais_jour -= delaisMap[checkbox.value];
-      } else if (delais_jour < 10) {
+      } else if (delais_jour < 27) {
         delais_jour += delaisMap[checkbox.value];
       }
       console.log(delais_jour);
@@ -330,9 +348,19 @@ else{
   alert("Veuillez sélectionner au moins une option.");
   return false;
 }
-  
+
   updateProgressBar();
-  afficherEtape5();
+  afficherInfo2();
+}
+
+function afficherInfo2 (){
+delais_affichage();
+updateProgressBar();
+var contentDiv = document.querySelector(".content");
+testHTML("etape3.html", function (event) {
+  var btnContinuer = document.querySelector(".btn-continuer");
+  btnContinuer.addEventListener("click", afficherEtape5);
+});
 }
 
 // Fonction pour afficher l'étape 5 du jeu
@@ -364,8 +392,10 @@ function afficherEtape5() {
         delais_jour += 5;
         console.log("deali");
       } else {
-        rien_faire += 1;
+        delais_jour += 2;
         console.log("rien");
+        updateProgressBar();
+        afficherEtape7();
       }
       updateProgressBar();
       afficherEtape6();
@@ -472,7 +502,7 @@ function afficherEtape9(event) {
       <ul class="no-bullets">
         ${htmlll}
       </ul>
-      <button class="btn-continuer" type="submit">Next</button>
+      <button class="btn-continuer" type="submit">Continuer</button>
     </form>`;
 
     var choixForm = document.getElementById("choixForm");
@@ -495,6 +525,8 @@ function afficherEtape9(event) {
   } else if (selectedChoice === "abandonner-fonctionnalite") {
     console.log("Vous avez choisi d'abandonner la fonctionnalité.");
   } else if (selectedChoice === "laisser-choix-moe") {
+    console.log("MOE choix ", choix_let_MOE );
+     choix_let_MOE = choix_let_MOE+ 1;
     afficherEtape10();
     console.log("Vous avez choisi de laisser le choix à la MOE.");
   }
@@ -586,8 +618,15 @@ function afficherEtape11(event) {
     return false;
   }
   if (selectedChoice === "ne-faire-aucun-test") {
-    afficher_9_bis();
-  } else {
+    rien_faire +=1 ;
+    afficher_page_9();
+  } else if (selectedChoice === "laisser-choix-moe") {
+    console.log("MOE choix ", choix_let_MOE );
+    choix_let_MOE =choix_let_MOE+ 1;
+    page_perdu();
+  }
+  
+  else {
     afficher_page_9();
   }
 }
@@ -602,15 +641,7 @@ function afficher_page_9() {
   });
 }
 
-function afficher_9_bis() {
-  delais_affichage();
-  updateProgressBar();
-  var contentDiv = document.querySelector(".content");
-  testHTML("aucun_test_page9.html", function (event) {
-    var btnContinuer = document.querySelector(".btn-continuer");
-    btnContinuer.addEventListener("click", page_fin);
-  });
-}
+
 
 function afficherEtape12(event) {
   delais_affichage();
@@ -638,23 +669,81 @@ function afficherEtape12(event) {
     "corriger-ensemble": 3,
     "corriger-majeur": 5,
     "ne-rien-faire": 0,
-    "laisser-choix-moe": 5,
+    "laisser-choix-moe": 4,
   };
+  if(selectedChoice == "laisser-choix-moe"){
+    console.log("MOE choix ", choix_let_MOE );
+    choix_let_MOE =choix_let_MOE+ 1;
+    }
+  
+    if(selectedChoice == "ne-rien-faire"){
+
+      rien_faire =rien_faire + 1;
+      }
+  
+  
   for (var key in choixx) {
     if (selectedChoice == key) {
-      
+  
       delais_jour += choixx[selectedChoice];
-      if(delais_jour>30) {page_perdu()}
-      else {page_fin()};
+
     }
+
+    if (delais_jour>50)   {page_perdu();}
+
+    else if (choix_let_MOE > 1) {page_fin_MOE();}
+
+    else if (delais_jour<40) {page_fin_tot();}
+
+    else {page_fin();}
+
+
+      
+    
   }
+}
+
+function page_fin_MOE() {
+  var contentDiv = document.querySelector(".content");
+  testHTML("page_fin_MOE.html", function (event) {
+    contentDiv.innerHTML += `<p> Nombre de jours pour la réalisation du projet : ${delais_jour} </p>
+    <button class="btn-continuer" id="quizzz", type="submit">Quiz</button>
+    <button class="btn-continuer" id="restart">Recommencer</button>`;
+
+    delais_affichage(); 
+    updateProgressBar(); 
+    btnContinuer=document.getElementById('quizzz');
+    btnContinuer.addEventListener('click',quizz);
+    var restart = document.getElementById('restart');
+    restart.addEventListener('click',function(){window.location.href='x.html'});
+
+  });
+
+}
+
+function page_fin_tot(){
+  var contentDiv = document.querySelector(".content");
+  testHTML("page_fin_tot.html", function (event) {
+    contentDiv.innerHTML += `<p> Nombre de jours pour la réalisation du projet : ${delais_jour} </p>
+    <button class="btn-continuer" id="quizzz", type="submit">Quiz</button>
+    <button class="btn-continuer" id="restart">Recommencer</button>`;
+
+    delais_affichage(); 
+    updateProgressBar(); 
+    btnContinuer=document.getElementById('quizzz');
+    btnContinuer.addEventListener('click',quizz);
+    var restart = document.getElementById('restart');
+    restart.addEventListener('click',function(){window.location.href='x.html'});
+
+  });
+
 }
 
 function page_fin() {
   
   var contentDiv = document.querySelector(".content");
   testHTML("pagefin.html", function (event) {
-    contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>
+    contentDiv.innerHTML += `<p> Nombre de jours pour la réalisation du projet : ${delais_jour} </p>
     <button class="btn-continuer" id="quizzz", type="submit">Quiz</button>
     <button class="btn-continuer" id="restart">Recommencer</button>`;
 
@@ -671,7 +760,7 @@ function page_perdu()
 {
   var contentDiv = document.querySelector(".content");
   testHTML("pageperdu.html", function (event) {
-    contentDiv.innerHTML += `<p> Delais en jours rajoutés durant le projet : ${delais_jour} </p>
+    contentDiv.innerHTML += `<p> Nombre de jours pour la réalisation du projet : ${delais_jour} </p>
     <button class="btn-continuer" id="quizzz", type="submit">Quiz</button>
     <button class="btn-continuer" id="restart">Recommencer</button>`;
     delais_affichage(); 
@@ -683,36 +772,36 @@ function quizz()
 {
   window.location.href='quizzMOA.html';
 }
-//afficherEtape1();
-page_accueil();
+afficherEtape1();
+
 updateProgressBar();
 
 
 function updateProgressBar() {
-var pourcentage = (delais_jour/50) * 100
+  var pourcentage = (delais_jour / 50) * 100;
 
-if (delais_jour>= 48 ) {
-  if (delais_jour<=50 ) {
+  if (delais_jour >= 48) {
+    if (delais_jour <= 50) {
+      var pourcentageOppose = Math.abs(pourcentage - 100);
+      var progressBar = document.querySelector(".progress");
+      progressBar.style.width = pourcentageOppose + "%";
+      progressBar.style.background = ""; // Réinitialiser la couleur de fond
+      progressBar.innerHTML = ""; // Réinitialiser le message
+    } else {
+      var progressBar = document.querySelector(".progress");
+      progressBar.style.width = "100%"; // Remplir la barre à 100%
+      progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
+      progressBar.innerHTML = "Délai dépassé /!\\";
+    }
+  } else {
     var pourcentageOppose = Math.abs(pourcentage - 100);
+    pourcentageOppose = pourcentageOppose + pourcentageOppose * 0.05;
+
     var progressBar = document.querySelector(".progress");
     progressBar.style.width = pourcentageOppose + "%";
+
+    // Réinitialiser le message et la couleur de fond
+    progressBar.style.background = ""; // Réinitialiser la couleur de fond
+    progressBar.innerHTML = ""; // Réinitialiser le message
   }
-  
-    
-  else {
-    var progressBar = document.querySelector(".progress");
-  progressBar.style.width = "100%"; // Remplir la barre à 100%
-  progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
-  progressBar.innerHTML = "Délai dépassé /!\\";
-
-  }  
-}
-
-else{
-var pourcentageOppose = Math.abs(pourcentage - 100);
-var pourcentageOppose = pourcentageOppose + (pourcentageOppose * 0.05);
-
-var progressBar = document.querySelector(".progress");
-progressBar.style.width = pourcentageOppose + "%";
-}
 }
