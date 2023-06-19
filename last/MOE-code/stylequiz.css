@@ -1,20 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&italic&display=swap');
-
-label,
-body,
-h1,
-.quizdiv,
-.question p,
-input[type="radio"],
-.submit-button,
-div.result {
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
 body {
-  background: linear-gradient(to bottom, #164987, #629191);
+  background:#164987;
+  font-family: Arial, sans-serif;
 }
 
 h1 {
@@ -22,8 +8,8 @@ h1 {
   color: #fff;
 }
 
-.quizdiv {
-  max-width: 600px;
+.quizzdiv {
+  max-width: 100%;
   margin: 0 auto;
   background-color: #fff;
   padding: 20px;
@@ -33,11 +19,12 @@ h1 {
 
 .question {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .question p {
   font-weight: bold;
-  color: #333;
+  color: #000000;
 }
 
 input[type="radio"] {
@@ -49,36 +36,22 @@ input[type="radio"]:hover {
 }
 
 .submit-button {
-  background: linear-gradient(to bottom, #164987, #393a3a);
+  background: #4286f4;
   color: #fff;
   border: none;
   padding: 10px 20px;
+  margin-top: 10px;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .submit-button:hover {
-  background: linear-gradient(to bottom, #164987, #393a3a);
+  background: #4286f4;
   transition: 1s;
   transform: translateY(20%);
 }
 
-div.result {
-  background: none;
-  padding-left: 10px;
-  width: 400px;
-  height: 800px;
-  margin-left: 2%;
-  border: 3px solid #000000;
-  border-radius: 5px;
-  color: whitesmoke;
-  font-family: 'Lato', sans-serif; /* Utilisation de Lato Light Italic */
-  font-weight: 300;
-  font-size: 20px;
-}
-
-div#global {
-  display: flex;
-  position: relative;
-}
