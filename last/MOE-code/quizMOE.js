@@ -68,25 +68,6 @@ scoreMessageElement.textContent = scoreMessage;
 scoreElement.appendChild(scoreMessageElement);
 
 content.appendChild(scoreElement);
-
-
-
-  // Add the "Recommencer" button
-  const restartButton = document.createElement('button');
-  restartButton.textContent = 'Recommencer';
-  restartButton.id = 'restart';
-  restartButton.type = 'button';
-  restartButton.className = 'submit-button';
-  content.appendChild(restartButton);
-
-  // Event listener for "Recommencer" button
-  restartButton.addEventListener('click', restartQuiz);
-}
-
-// Function to restart the quiz
-function restartQuiz() {
-  // Reload the page to restart the quiz
-  location.reload();
 }
 
 // Event listener for form submission
