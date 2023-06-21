@@ -85,7 +85,18 @@ retourAccueilButton.addEventListener('click', function() {
   window.location.href = grandParentUrl + '/MOA/x.html';
 });
 }
+const retourAccueilButton = document.getElementById('retourAccueil');
 
+// Ajoutez un gestionnaire d'événement pour le clic sur le bouton
+retourAccueilButton.addEventListener('click', function() {
+  var currentUrl = window.location.href;
+  var parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/"));
+  var grandParentUrl = parentUrl.substring(0, parentUrl.lastIndexOf("/"));
+
+  // Afficher le chemin d'accès au dossier parent (last)
+  console.log(grandParentUrl);
+  window.location.href = grandParentUrl + '/MOA/x.html';
+});
 
 // Event listener for form submission
 document.getElementById('quizz').addEventListener('submit', function (event) {
