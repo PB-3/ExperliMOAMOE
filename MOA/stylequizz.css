@@ -36,21 +36,30 @@ body {
   
 
   .submit-button {
-    background: linear-gradient(to bottom, #164987,#393a3a);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+  background: #164987;
+  color:  #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  position:static;
   
-  .submit-button:hover {
-    background: linear-gradient(to bottom,#164987, #393a3a);
-    transition: 1s;
-    transform: translateY(20%);
+  display: inline-block;
+  bottom: 50%;
+  left: 40%;
 
-  }
+  transition: 1s;
+}
+
+.submit-button:hover {
+  background: #4286f4;
+  transition: 1s;
+  transform: translateY(20%);
+}
+
   
   div.result {
     background:none;
