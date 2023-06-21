@@ -1,0 +1,164 @@
+body {
+  background:  #164987;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+}
+
+.quizzdiv {
+  width: 1000px;
+  height: 1500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow:auto;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.question p {
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+.submit-button {
+  background: #164987;
+  color:  #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  position:static;
+  
+  display: inline-block;
+  bottom: 50%;
+  left: 40%;
+
+  transition: 1s;
+}
+
+.submit-button:hover {
+  background: #4286f4;
+  transition: 1s;
+  transform: translateY(20%);
+}
+
+div.result {
+  background: none;
+  padding-left: 10px;
+  width: 400px;
+  height: 800px;
+  margin-left: 2%;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font: 400;
+  font-size: 20px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+div#global {
+  display: flex;
+  position: relative;
+}body {
+  background:  #164987;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+}
+
+.quizzdiv {
+  width: 1000px;
+  height: 1500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.question p {
+  font-weight: bold;
+  color: #333;
+}
+
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+.submit-button {
+  background: #164987;
+  color:  #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  position:static;
+  margin-top: 10px;
+  display: inline-block;
+  bottom: 50%;
+  left: 40%;
+
+  transition: 1s;
+}
+
+.submit-button:hover {
+  background: #4286f4;
+  transition: 1s;
+  transform: translateY(20%);
+}
+
+div.result {
+  background: none;
+  padding-left: 10px;
+  width: 400px;
+  height: 800px;
+  margin-left: 2%;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  color: whitesmoke;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font: 400;
+  font-size: 20px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
+
+div#global {
+  display: flex;
+  position: relative;
+}
