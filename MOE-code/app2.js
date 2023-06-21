@@ -368,7 +368,7 @@ function afficherEtape4_1() {
 
   contentDiv.innerHTML = htmll;
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", afficherEtape6);
+  btnContinuer.addEventListener("click", afficherEtape5);
   }
 
 function afficherEtape4_2() {
@@ -877,7 +877,7 @@ function afficherEtapeFin_Bad_Option() {
     </div>
   `;
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", afficherEtape1);
+  btnContinuer.addEventListener("click", quizz);
 }
 
 function afficherEtapeFin_Bad_Time() {
@@ -893,7 +893,7 @@ function afficherEtapeFin_Bad_Time() {
     </div>
   `;
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", afficherEtape1);
+  btnContinuer.addEventListener("click", qui);
 }
 
 function afficherEtapeFin_Good() {
