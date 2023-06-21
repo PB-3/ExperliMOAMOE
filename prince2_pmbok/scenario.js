@@ -70,10 +70,10 @@ var choices = {
 
 
 function updateProgressBar() {
-  var pourcentage = (cout / 14000) * 100;
+  var pourcentage = (cout / 13000) * 100;
 
   
-    if (cout <= 14000) {
+    if (cout <= 13000) {
       var pourcentageOppose = Math.abs(pourcentage - 100);
       var progressBar = document.querySelector(".progress");
       progressBar.style.width = pourcentageOppose + "%";
@@ -83,7 +83,7 @@ function updateProgressBar() {
       var progressBar = document.querySelector(".progress");
       progressBar.style.width = "100%"; // Remplir la barre à 100%
       progressBar.style.background = "#eb4343"; // Changer la couleur de fond en #ff0000
-      progressBar.innerHTML = "Délai dépassé /!\\";
+      progressBar.innerHTML = "Budget dépassé /!\\";
     }
  
 
@@ -94,7 +94,7 @@ function updateProgressBar() {
 
 
 function checkWinOrLose() {
-  var winRange = { min: 10000, max: 14000 };
+  var winRange = { min: 10000, max: 13000 };
 
   if (cout >= winRange.min && cout <= winRange.max) {
     console.log("Congratulations! You win!");
@@ -310,6 +310,7 @@ function prince2_4(event) {
     if ((element.type === "radio" || element.type === "checkbox") && element.checked) {
       selectedChoice = element.value;
       cout+=choices[selectedChoice];
+       updateProgressBar(); 
       console.log(cout,"choix decoupzge")
       break;
     }
@@ -530,6 +531,7 @@ function prince2_9() {
           selectedChoice = element.value;
           choixProjet.push(selectedChoice);
           cout += choices[selectedChoice];
+          updateProgressBar();
           console.log(cout);
           if(checkWinOrLose()) prince2_10_win();
           else
