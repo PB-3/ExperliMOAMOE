@@ -126,7 +126,7 @@ function afficherEtape1() {
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
     <div class="game-title">
-      <h1>EXPERLIMoaMoe</h1>
+      <h1>Scénario MOE</h1>
       <p>Dans cette partie, vous jouez le rôle de la MOE (Maîtrise d'Œuvre). Votre responsabilité est de mettre en œuvre le projet en fonction des besoins, du budget et des délais fixés par la MOA (Maîtrise d'Ouvrage). Tout au long du projet, la MOE doit concevoir la solution au problème proposé, en établir les spécificités, coordonner les intervenants, gérer les risques, suivre le budget et le planning, et enfin assurer la maintenance.</p>
       <button class="btn-continuer">Continuer</button>
     </div>
@@ -141,7 +141,7 @@ function afficherEtape1_5() {
   var contentDiv = document.querySelector(".content");
   contentDiv.innerHTML = `
     <div class="game-title">
-      <h1>EXPERLIMoaMoe</h1>
+      <h1>Scénario MOE</h1>
       <p>Durant la phase de lancement de projet, la MOE doit donc analyser les risques, préparer un planning à respecter, et aider la MOA à choisir les spécificités du projet afin de respecter les délais et le budget. Voici 10 recommandations qui sont sont faites aux responsables de projet en général:</p>
       <ul>
         <li>Structurer le projet en lots de travaux réalistes et affectables.</li>
@@ -153,7 +153,7 @@ function afficherEtape1_5() {
         <li>Définir au moins un indicateur clé de délais.</li>
         <li>Mettre à jour régulièrement le « reste à faire » du projet.</li>
         <li>Analyser régulièrement les dérives de charges et définir les plans d'action en conséquence.</li>
-        <li>Analyser les risques de glissement de planning, définir et mettre en place des plans d'actions préventifs.</li>
+        <li>Analyser les risques de glissements de planning, définir et mettre en place des plans d'actions préventifs.</li>
       </ul>
       <button class="btn-continuer">Continuer</button>
     </div>
@@ -368,7 +368,7 @@ function afficherEtape4_1() {
 
   contentDiv.innerHTML = htmll;
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", afficherEtape5);
+  btnContinuer.addEventListener("click", afficherEtape6);
   }
 
 function afficherEtape4_2() {
@@ -877,7 +877,7 @@ function afficherEtapeFin_Bad_Option() {
     </div>
   `;
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", quizz);
+  btnContinuer.addEventListener("click", afficherEtape1);
 }
 
 function afficherEtapeFin_Bad_Time() {
@@ -893,7 +893,7 @@ function afficherEtapeFin_Bad_Time() {
     </div>
   `;
   var btnContinuer = document.querySelector(".btn-continuer");
-  btnContinuer.addEventListener("click", qui);
+  btnContinuer.addEventListener("click", afficherEtape1);
 }
 
 function afficherEtapeFin_Good() {
@@ -946,7 +946,7 @@ function afficherEtapeFin_Mid_MOE() {
 
 function quizz()
 {
-  window.location.href='quizMOE.php';
+  window.location.href='quizMOE.html';
 }
 
 

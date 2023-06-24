@@ -113,5 +113,5 @@ retourAccueilButton.addEventListener('click', function() {
 
 // Afficher le chemin d'accès au dossier parent (last)
   console.log(grandParentUrl);  
-  window.location.href=grandParentUrl+'/MOA/x.html';
+  window.location.href='../index.html';
 });

@@ -113,7 +113,7 @@ function afficherEtape2() {
   updateProgressBar();
   delais_affichage();
   var contentDiv = document.querySelector(".content");
-  testHTML("infos_projets_debut.html", function () {
+  testHTML("info.html", function () {
     const choixForm = document.getElementById("choixForm");
     choixForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Empêche le rechargement de la page après la soumission du formulaire
@@ -803,7 +803,7 @@ function page_perdu()
 }
 function quizz()
 {
-  window.location.href='quizzMOA.php';
+  window.location.href='quizzMOA.html';
 }
 
 afficherEtape1();
