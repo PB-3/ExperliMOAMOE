@@ -47,6 +47,20 @@ function checkResults() {
       liste_explication.push(false);
     }
   }
+
+  // Send the score to the server using AJAX
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'quizMOE.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(score);
+    }
+  };
+  xhr.send('score=' + score);
+
+
+
 // Show the score
 const content = document.querySelector('.quizzdiv');
 content.innerHTML = ''; // Clear previous content

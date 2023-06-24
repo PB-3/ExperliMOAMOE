@@ -1,5 +1,5 @@
 // Array of correct answers
-let answers = ['a','d','c','b','d'];
+let answers = ['a','d','c','b','d','b','b','c','a','b'];
 let liste_explication=[];
 explanations = [
   "<p>1. Qu'est-ce qu'une norme qualité ?</p>Les normes qualité sont des documents qui définissent les exigences, les spécifications, les lignes directrices ou les caractéristiques à suivre pour s'assurer que les produits, les processus et les services répondent à des normes de qualité spécifiques.",
@@ -40,6 +40,18 @@ function checkResults() {
       liste_explication.push(false);
     }
   }
+
+  // Send the score to the server using AJAX
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'quizNorme.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(score);
+    }
+  };
+  xhr.send('score=' + score);
+
 // Show the score
 const content = document.querySelector('.quizzdiv');
 content.innerHTML = ''; // Clear previous content

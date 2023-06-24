@@ -21,6 +21,50 @@
                 } else {
                     echo "Aucune donnée trouvée.";
                 }
+// Create a database connection
+$conn = new mysqli('localhost', 'pb', 'Project123!', 'pb');
+
+// Check the database connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve the value of score_moa from the database
+$username = $_SESSION['username'];
+$stmt = $conn->prepare("SELECT score_moe FROM utilisateur WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->bind_result($score_moe);
+$stmt->fetch();
+$stmt->close();
+
+// Check if a value exists for score_moa
+if ($score_moa !== null) {
+   echo "<script>alert('Le score moe existe déjà.'); window.location.href='../index.php';</script>";
+} else {
+  if (isset($_POST['score'])) {
+    $score = $_POST['score'];
+
+    // Prepare the SQL statement to insert the score into the database
+    $stmt = $conn->prepare("UPDATE utilisateur SET score_moe = ? WHERE username = ?");
+    $stmt->bind_param("is", $score, $username);  // Assuming the score is an integer and username is a string
+    $stmt->execute();
+
+    // Check if the score was inserted successfully
+    if ($stmt->affected_rows > 0) {
+      echo "<script>alert('Score inséré avec succès!');</script>";
+    } else {
+      echo "<script>alert('Erreur lors de l'insertion du score.');</script>";
+    }
+
+    $stmt->close();
+  } else {
+    echo "";
+  }
+}
+
+$conn->close();
+
 
 ?>
   <h1>Quiz MOE</h1>

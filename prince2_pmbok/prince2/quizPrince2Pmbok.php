@@ -3,31 +3,76 @@
 <head>
   <title>Quiz PRINCE2|PMBOK</title>
   <link rel="stylesheet" href="quizz_pmbok_prince2.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <?php
-                // Vérifiez si les informations de connexion existent dans la session
-                session_start();
-                if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
-                    // Les informations de connexion existent
-                    $username = $_SESSION['username'];
-                    $email = $_SESSION['email'];
-                ?>
-                    <div class="user-info">
-                        <span class="username"><?php echo "Utilisateur: $username"; ?></span><br>
-                        <span class="email"><?php echo "Email: $email"; ?></span><br>
-                    </div>
-                <?php
-                } else {
-                    echo "Aucune donnée trouvée.";
-                }
+session_start();
 
+if (isset($_SESSION['username']) && isset($_SESSION['email'])) {
+  $username = $_SESSION['username'];
+  $email = $_SESSION['email'];
+  ?>
+  <div class="user-info">
+    <span class="username"><?php echo "Utilisateur: $username"; ?></span><br>
+    <span class="email"><?php echo "Email: $email"; ?></span><br>
+  </div>
+  <?php
+} else {
+  echo "Aucune donnée trouvée.";
+}
+// Create a database connection
+$conn = new mysqli('localhost', 'pb', 'Project123!', 'pb');
+
+// Check the database connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// Retrieve the value of score_prince2_pmbok from the database
+$username = $_SESSION['username'];
+$stmt = $conn->prepare("SELECT score_prince2_pmbok FROM utilisateur WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->bind_result($score_prince2_pmbok);
+$stmt->fetch();
+$stmt->close();
+
+// Check if a value exists for score_prince2_pmbok
+if ($score_prince2_pmbok !== null) {
+  echo "<script>alert('Le score prince2_pmbok existe déjà.'); window.location.href='../../index.php';</script>";
+} else {
+  if (isset($_POST['score'])) {
+    $score = $_POST['score'];
+
+    // Prepare the SQL statement to insert the score into the database
+    $stmt = $conn->prepare("UPDATE utilisateur SET score_prince2_pmbok = ? WHERE username = ?");
+    $stmt->bind_param("is", $score, $username);  // Assuming the score is an integer and username is a string
+    $stmt->execute();
+
+    // Check if the score was inserted successfully
+    if ($stmt->affected_rows > 0) {
+      echo "<script>alert('Score inséré avec succès!');</script>";
+    } else {
+      echo "<script>alert('Erreur lors de l'insertion du score.');</script>";
+    }
+
+    $stmt->close();
+  } else {
+    echo "";
+  }
+}
+
+$conn->close();
 ?>
+
   <h1>Quiz Prince2 | Pmbok !</h1>
 
   <div id="global">
     <div class="quizzdiv">
-      <form id="quizz">
+      <form id="quizz" action="" method="POST">
+          <input type="hidden" name="score" id="score" value="">
         <div class="question" id="q1">
           <p>1. Qu'est-ce que signifie l'acronyme PRINCE2 ?</p>
           <label for="q1a">a) Projects IN Controlled Environments</label>

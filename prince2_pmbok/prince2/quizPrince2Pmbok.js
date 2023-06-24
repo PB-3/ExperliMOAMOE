@@ -1,7 +1,6 @@
 // Array of correct answers
-let answers = ['a','b','a','a','a','a','d','c','a','a'];
-let liste_explication=[];
-explanations = [
+let answers = ['a', 'b', 'a', 'a', 'a', 'a', 'd', 'c', 'a', 'a'];
+let explanations = [
   "L'acronyme PRINCE2 signifie 'PRojects IN Controlled Environments.' C'est la bonne réponse, car PRINCE2 est une méthodologie de gestion de projet qui se concentre sur la gestion structurée des projets dans des environnements contrôlés.",
   "La principale caractéristique de PRINCE2 est le 'focus sur les processus et la documentation.' C'est la réponse correcte, car PRINCE2 met l'accent sur l'utilisation de processus bien définis et sur la documentation détaillée pour assurer une gestion efficace des projets.",
   "PMBOK représente 'Project Management Body of Knowledge.' C'est la bonne réponse, car PMBOK est une norme reconnue mondialement qui compile les connaissances et les meilleures pratiques en gestion de projet.",
@@ -35,52 +34,67 @@ function checkResults() {
 
   // Compare selected answers with correct answers
   let score = 0;
+  let liste_explication = [];
   for (let i = 0; i < answers.length; i++) {
     if (selectedAnswers[i] === answers[i]) {
       liste_explication.push(true);
       score++;
-
-    }
-    else{
+    } else {
       liste_explication.push(false);
     }
   }
-// Show the score
-const content = document.querySelector('.quizzdiv');
-content.innerHTML = ''; // Clear previous content
 
-let scoreMessage = `Votre score: ${score} sur ${answers.length}`;
-const scoreElement = document.createElement('div');
+//  console.log("value_score : ",value_score);
+  //console.log("score : ",score);
 
-for (let i = 0; i < explanations.length; i++) {
-  if (!liste_explication[i]) {
-    const explanationElement = document.createElement('p');
-    explanationElement.innerHTML = `<strong>Explication pour la question ${i + 1}:</strong> ${explanations[i]}`;
-    scoreElement.appendChild(explanationElement);
 
-    const lineBreak = document.createElement('br');
-    scoreElement.appendChild(lineBreak);
+  // Send the score to the server using AJAX
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'quizPrince2Pmbok.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(score);
+    }
+  };
+  xhr.send('score=' + score);
+
+  // Show the score
+  const content = document.querySelector('.quizzdiv');
+  content.innerHTML = ''; // Clear previous content
+
+  let scoreMessage = `Votre score: ${score} sur ${answers.length}`;
+
+  const scoreElement = document.createElement('div');
+
+  for (let i = 0; i < explanations.length; i++) {
+    if (!liste_explication[i]) {
+      const explanationElement = document.createElement('p');
+      explanationElement.innerHTML = `<strong>Explication pour la question ${i + 1}:</strong> ${explanations[i]}`;
+      scoreElement.appendChild(explanationElement);
+
+      const lineBreak = document.createElement('br');
+      scoreElement.appendChild(lineBreak);
+    }
   }
-}
 
-const scoreMessageElement = document.createElement('p');
-scoreMessageElement.textContent = scoreMessage;
-scoreElement.appendChild(scoreMessageElement);
+  const scoreMessageElement = document.createElement('p');
+  scoreMessageElement.textContent = scoreMessage;
+  scoreElement.appendChild(scoreMessageElement);
 
-content.appendChild(scoreElement);
-content.insertAdjacentHTML('beforeend', '<button id="retourAccueil" class="submit-button" type="click">Retour à l\'accueil</button>');
-const retourAccueilButton = document.getElementById('retourAccueil');
+  content.appendChild(scoreElement);
+  content.insertAdjacentHTML('beforeend', '<button id="retourAccueil" class="submit-button" type="click">Retour à l\'accueil</button>');
 
-// Ajoutez un gestionnaire d'événement pour le clic sur le bouton
-retourAccueilButton.addEventListener('click', function() {
-  var currentUrl = window.location.href;
-  var parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/"));
-  var grandParentUrl = parentUrl.substring(0, parentUrl.lastIndexOf("/"));
+  const retourAccueilButton = document.getElementById('retourAccueil');
 
-  // Afficher le chemin d'accès au dossier parent (last)
-  console.log(grandParentUrl);
-  window.location.href = grandParentUrl + '/MOA/x.html';
-});
+  // Add an event handler for the button click
+  retourAccueilButton.addEventListener('click', function () {
+    var currentUrl = window.location.href;
+    var parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/"));
+    var grandParentUrl = parentUrl.substring(0, parentUrl.lastIndexOf("/"));
+
+    window.location.href = grandParentUrl + '/MOA/x.html';
+  });
 }
 
 // Event listener for form submission
@@ -102,15 +116,12 @@ showQuestion();
 
 const retourAccueilButton = document.getElementById('retourAccueil');
 
-// Ajoutez un gestionnaire d'événement pour le clic sur le bouton
-retourAccueilButton.addEventListener('click', function() {
- 
+// Add an event handler for the button click
+retourAccueilButton.addEventListener('click', function () {
   var currentUrl = window.location.href;
   var parentUrl = currentUrl.substring(0, currentUrl.lastIndexOf("/"));
   var grandParentUrl = parentUrl.substring(0, parentUrl.lastIndexOf("/"));
   grandParentUrl = parentUrl.substring(0, grandParentUrl.lastIndexOf("/"));
 
-// Afficher le chemin d'accès au dossier parent (last)
-  console.log(grandParentUrl);
-  window.location.href=grandParentUrl+'/MOA/x.html';
+  window.location.href = '../index.php';
 });
