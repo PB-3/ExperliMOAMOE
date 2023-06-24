@@ -67,4 +67,3 @@ function choix_scenario(event) {
   
 var btn = document.querySelector("#choixForm");
 btn.addEventListener("submit",choix_scenario);
-consol.log("aled");

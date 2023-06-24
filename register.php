@@ -40,9 +40,10 @@ if (isset($_REQUEST['username'], $_REQUEST['email'], $_REQUEST['password'])){
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <img src="logoExperligence.png" style="width: 200px; height: 150px;margin-left:45%;">
 
 <form class="box" action="" method="post">
-  <h1 class="box-logo box-title"><a href="https://waytolearnx.com/">WayToLearnX.com</a></h1>
+  <h1 class="box-logo box-title"><a href="https://www.experligence.com/">Experligence.com</a></h1>
   <h1 class="box-title">S'inscrire</h1>
   <input type="text" class="box-input" name="username" placeholder="Nom d'utilisateur" required />
   <input type="text" class="box-input" name="email" placeholder="Email" required />
@@ -51,6 +52,8 @@ if (isset($_REQUEST['username'], $_REQUEST['email'], $_REQUEST['password'])){
   <input type="submit" name="envoi" value="S'inscrire" class="box-button" />
   <p class="box-register">Déjà inscrit? <a href="login.php">Connectez-vous ici</a></p>
 </form>
+  <img src="10ansExperligence.png" style="height: 100px; display: block; margin-left: auto; margin-right: auto;">
+
 <?php } ?>
 </body>
 </html>

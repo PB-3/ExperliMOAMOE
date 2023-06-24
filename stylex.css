@@ -387,7 +387,6 @@ div.dropdown {
 
 label[for="MOA"],
 label[for="MOE"],
-label[for="PRINCE2"],
-label[for="NORME"] {
+label[for="PRINCE2"] {
   margin-left: 20px; /* Ajustez la valeur pour modifier l'espace */
 }

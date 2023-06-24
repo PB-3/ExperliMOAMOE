@@ -49,6 +49,9 @@ if ($rows == 1){
 
   </div>
 
+<div class="container">
+  <img src="logoExperligence.png" style="width: 200px; height: 150px; display: block;margin-left: 45%;">
+
 <div class="content">
    
 <h1> Bienvenue sur ExperliMOAMOE ! </h1>
@@ -96,7 +99,8 @@ if ($rows == 1){
 
 </form>
 </div>
-
+<img src="10ansExperligence.png" style="height: 100px;display: block; margin-left: 750px">
+</div>
 <script src="Choix_Jeu.js"></script>
 
 </body>
